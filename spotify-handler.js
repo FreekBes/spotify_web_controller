@@ -7,6 +7,7 @@ var spotifyHandler = {
     progress: 0,
     duration: 0,
     lastTrackId: "nullisalsousedforlocaltracks",
+    lastQueueId: "nullisalsousedforprivatesessions",
     lastPlaybackStatus: {},
 
     signIn: function() {
@@ -51,7 +52,7 @@ var spotifyHandler = {
                     if (data.context != null) {
                         switch (data.context.type) {
                             case "playlist": {
-                                spotifyHandler.api.getPlaylist(data.context.uri.split(":").pop(), {fields: "name"}, function(err, data) {
+                                spotifyHandler.api.getPlaylist(data.context.uri.split(":").pop(), {fields: "name,id"}, function(err, data) {
                                     if (err) {
                                         console.error(err);
                                     }
@@ -59,6 +60,8 @@ var spotifyHandler = {
                                         // console.log(data);
                                         spotifyHandler.dom.playingFrom.innerHTML = "Playing from playlist";
                                         spotifyHandler.dom.playingFromName.innerHTML = stripTags(data.name);
+                                        spotifyHandler.dom.contextName.innerHTML = stripTags(data.name);
+                                        spotifyHandler.fillQueue("playlist", data.id);
                                     }
                                 });
                                 break;
@@ -72,6 +75,8 @@ var spotifyHandler = {
                                         // console.log(data);
                                         spotifyHandler.dom.playingFrom.innerHTML = "Playing from album";
                                         spotifyHandler.dom.playingFromName.innerHTML = stripTags(data.name);
+                                        spotifyHandler.dom.contextName.innerHTML = stripTags(data.name);
+                                        spotifyHandler.fillQueue("album", data.id);
                                     }
                                 });
                                 break;
@@ -85,6 +90,9 @@ var spotifyHandler = {
                                         // console.log(data);
                                         spotifyHandler.dom.playingFrom.innerHTML = "Playing from artist";
                                         spotifyHandler.dom.playingFromName.innerHTML = stripTags(data.name);
+                                        spotifyHandler.dom.contextName.innerHTML = stripTags(data.name);
+                                        spotifyHandler.dom.queueButton.disabled = true;
+                                        spotifyHandler.fillQueue("artist", data.id);
                                     }
                                 });
                                 break;
@@ -92,6 +100,8 @@ var spotifyHandler = {
                             default: {
                                 spotifyHandler.dom.playingFrom.innerHTML = "";
                                 spotifyHandler.dom.playingFromName.innerHTML = "";
+                                spotifyHandler.dom.contextName.innerHTML = "";
+                                spotifyHandler.fillQueue(null, null);
                                 break;
                             }
                         }
@@ -99,6 +109,8 @@ var spotifyHandler = {
                     else {
                         spotifyHandler.dom.playingFrom.innerHTML = "";
                         spotifyHandler.dom.playingFromName.innerHTML = "";
+                        spotifyHandler.dom.contextName.innerHTML = "";
+                        spotifyHandler.fillQueue(null, null);
                     }
                     if ('mediaSession' in navigator)
                     {
@@ -286,6 +298,49 @@ var spotifyHandler = {
         }
     },
 
+    fillQueue: function(type, id) {
+        spotifyHandler.dom.queueButton.disabled = true;
+        return;
+        if (spotifyHandler.lastQueueId != id) {
+            spotifyHandler.lastQueueId = id;
+            spotifyHandler.dom.queue.innerHTML = "";
+            if (type == "album") {
+                spotifyHandler.api.getAlbum(id, {}, function(err, data) {
+                    if (err) {
+                        console.error(err);
+                    }
+                    else {
+                        console.log("Queue retrieved");
+                        spotifyHandler.fillQueueTracks(data.tracks);
+                    }
+                });
+            }
+            else {
+                spotifyHandler.dom.queueButton.disabled = true;
+            }
+        }
+        else {
+            console.log("Queue already loaded for id " + id);
+        }
+    },
+
+    fillQueueTracks: function(tracks) {
+        spotifyHandler.dom.queueButton.disabled = false;
+        console.log(tracks);
+        var trackElem = null;
+        var tempArtists = [];
+        for (var i = 0; i < tracks.items.length; i++) {
+            trackElem = document.createElement("li");
+            trackElem.className = "queue-item";
+            tempArtists = [];
+            for (var j = 0; j < tracks.items[i].artists.length; j++) {
+                tempArtists.push(tracks.items[i].artists[j].name);
+            }
+            trackElem.innerHTML = '<div class="queue-item-name">'+tracks.items[i].name+'</div><div class="queue-item-artist">'+tempArtists.join(', ')+'</div>';
+            spotifyHandler.dom.queue.appendChild(trackElem);
+        }
+    },
+
     init: function() {
         document.getElementById("signinbtn").addEventListener("click", spotifyHandler.signIn);
 
@@ -305,6 +360,9 @@ var spotifyHandler = {
         spotifyHandler.dom.nextButton = document.getElementById("next-button");
         spotifyHandler.dom.repeatButton = document.getElementById("repeat-button");
         spotifyHandler.dom.devicesButton = document.getElementById("devices-button");
+        spotifyHandler.dom.queueButton = document.getElementById("queue-button");
+        spotifyHandler.dom.queue = document.getElementById("queue");
+        spotifyHandler.dom.contextName = document.getElementById("contextname");
         spotifyHandler.dom.deviceListHolder = document.getElementById("devicelist-holder");
         spotifyHandler.dom.deviceList = document.getElementById("devicelist");
         spotifyHandler.dom.volumebar = document.getElementById("volumebar");
@@ -408,6 +466,9 @@ var spotifyHandler = {
         });
         spotifyHandler.dom.devicesButton.addEventListener("click", function(event) {
             pageHandler.showPage("devicespage");
+        });
+        spotifyHandler.dom.queueButton.addEventListener("click", function(event) {
+            pageHandler.showPage("queuepage");
         });
         spotifyHandler.dom.shuffleButton.addEventListener("click", function(event) {
             spotifyHandler.dom.shuffleButton.disabled = true;

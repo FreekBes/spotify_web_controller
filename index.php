@@ -68,6 +68,13 @@
             </div>
             <button id="devicespageclose-button" class="material-icons close-button" onclick="pageHandler.showPage('playerpage');">&#xe5cd;</button>
         </div>
+        <div class="page" id="queuepage">
+            <h2 id="contextname"></h2>
+            <div id="queue-holder">
+                <ul id="queue"></ul>
+            </div>
+            <button id="queuepageclose-button" class="material-icons close-button" onclick="pageHandler.showPage('playerpage');">&#xe5cd;</button>
+        </div>
         <div class="page" id="playerpage">
             <div id="topbar">
                 <div id="playing-from-holder">
@@ -103,7 +110,7 @@
                 </div>
                 <div id="bottombar">
                     <button class="material-icons bar-button" id="devices-button" title="Spotify Connect" data-curdevice="">&#xe32e;</button>
-                    <!--<button class="material-icons bar-button" id="playlist-button" title="Queue">&#xe05f;</button>-->
+                    <button class="material-icons bar-button" id="queue-button" title="Queue">&#xe05f;</button>
                 </div>
             </div>
         </div>
