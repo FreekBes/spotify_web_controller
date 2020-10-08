@@ -258,12 +258,18 @@ var spotifyHandler = {
             spotifyHandler.dom.nextButton.disabled = true;
             spotifyHandler.api.skipToNext({}, function() {
                 spotifyHandler.dom.nextButton.disabled = false;
+                setTimeout(function() {
+                    spotifyHandler.setCurrentlyPlaying();
+                }, 250);
             });
         });
         spotifyHandler.dom.previousButton.addEventListener("click", function(event) {
             spotifyHandler.dom.previousButton.disabled = true;
             spotifyHandler.api.skipToPrevious({}, function() {
                 spotifyHandler.dom.previousButton.disabled = false;
+                setTimeout(function() {
+                    spotifyHandler.setCurrentlyPlaying();
+                }, 250);
             });
         });
         spotifyHandler.dom.likeButton.addEventListener("click", function(event) {

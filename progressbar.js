@@ -155,6 +155,9 @@ var progressBar = {
 		progressBar.progressMouseMoveCalc(e);
 		spotifyHandler.api.seek(Math.floor((progressBar.getValue() / 100) * (spotifyHandler.duration * 1000)), {});
 		// spotifyHandler.api.play();
+		setTimeout(function() {
+			spotifyHandler.setCurrentlyPlaying();
+		}, 250);
 	},
 	
 	init: function() {
