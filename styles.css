@@ -457,15 +457,21 @@ button[disabled] {
     color: #1DB954;
 }
 
-#devicelist-holder {
+#devicelist-holder, #discoverlist-holder {
     padding: 16px;
 }
 
-#selectdevice {
+#discoverlist-holder {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.selectdevice {
     font-weight: bold;
 }
 
-#devicelist {
+#devicelist, #discoverlist {
+    text-align: left;
     padding: 0px;
     margin: 10px 0px;
     list-style-type: none;

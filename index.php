@@ -48,8 +48,12 @@
             <div style="display: table; width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px;">
                 <div style="display: table-cell; vertical-align: middle;">
                     <h2>Looking for instances of Spotify...</h2>
-                    <p id="discover-disclaimer" class="disclaimer">Open Spotify on your computer, smartphone, or anything else. Once you've started playing something, you will be able to control playback here too.</p>
-                    <div class="spinner"></div>
+                    <p id="discover-disclaimer" class="disclaimer">Open Spotify on your computer, smartphone, or anything else. You will be able to control playback here once you've done so.</p>
+                    <div id="discoverspinner" class="spinner"></div>
+                    <div id="discoverlist-holder" style="display: none;">
+                        <div class="selectdevice">Which device would you like to use?</div>
+                        <ul id="discoverlist"></ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,7 +64,7 @@
                 <div id="listeningon"></div>
             </div>
             <div id="devicelist-holder">
-                <div id="selectdevice">Select a device</div>
+                <div class="selectdevice">Select a device</div>
                 <ul id="devicelist"></ul>
             </div>
             <div id="volumebar-holder">

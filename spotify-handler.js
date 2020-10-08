@@ -203,6 +203,11 @@ var spotifyHandler = {
                 }
                 else {
                     console.log("No instances of Spotify found to control.");
+                    if (spotifyHandler.lastTrackId != "null2") {
+                        setTimeout(function() {
+                            spotifyHandler.refreshDevices();
+                        }, 500);
+                    }
                     if (pageHandler.shown != "discoverpage") {
                         pageHandler.showPage("discoverpage");
                     }
@@ -236,6 +241,7 @@ var spotifyHandler = {
                 }
                 else {
                     var tempList = "";
+                    var tempListDis = "";
                     for (var i = 0; i < data.devices.length; i++) {
                         if (data.devices[i].is_active) {
                             spotifyHandler.dom.listeningOn.innerHTML = stripTags(data.devices[i].name);
@@ -257,8 +263,10 @@ var spotifyHandler = {
                         else {
                             tempList += '<li class="devicelist-item" onclick="spotifyHandler.transferPlayback(\''+data.devices[i].id+'\')"><span class="devicelist-icon material-icons">'+getDeviceIcon(data.devices[i].type.toLowerCase())+'</span><span class="devicelist-name">'+data.devices[i].name+'</span></li>';
                         }
+                        tempListDis += '<li class="devicelist-item" onclick="spotifyHandler.startPlaySession(\''+data.devices[i].id+'\')"><span class="devicelist-icon material-icons">'+getDeviceIcon(data.devices[i].type.toLowerCase())+'</span><span class="devicelist-name">'+data.devices[i].name+'</span></li>';
                     }
                     spotifyHandler.dom.deviceList.innerHTML = tempList;
+                    spotifyHandler.dom.discoverList.innerHTML = tempListDis;
                     if (data.devices.length > 1) {
                         spotifyHandler.dom.deviceListHolder.style.display = "block";
                         spotifyHandler.dom.devicesButton.className = "material-icons bar-button dotted";
@@ -266,6 +274,14 @@ var spotifyHandler = {
                     else {
                         spotifyHandler.dom.deviceListHolder.style.display = "none";
                         spotifyHandler.dom.devicesButton.className = "material-icons bar-button";
+                    }
+                    if (data.devices.length > 0) {
+                        spotifyHandler.dom.discoverSpinner.style.display = "none";
+                        spotifyHandler.dom.discoverListHolder.style.display = null;
+                    }
+                    else {
+                        spotifyHandler.dom.discoverSpinner.style.display = null;
+                        spotifyHandler.dom.discoverListHolder.style.display = "none";
                     }
                 }
             });
@@ -345,6 +361,17 @@ var spotifyHandler = {
         }
     },
 
+    startPlaySession: function(deviceId) {
+        spotifyHandler.api.play({
+            device_id: deviceId
+        }, function(err, data) {
+            if (err) {
+                console.error(err);
+                alert("Could not start playback due to an error ("+err.status+"). You'll have to start it yourself, on the device you clicked on.");
+            }
+        });
+    },
+
     init: function() {
         document.getElementById("signinbtn").addEventListener("click", spotifyHandler.signIn);
 
@@ -369,6 +396,9 @@ var spotifyHandler = {
         spotifyHandler.dom.contextName = document.getElementById("contextname");
         spotifyHandler.dom.deviceListHolder = document.getElementById("devicelist-holder");
         spotifyHandler.dom.deviceList = document.getElementById("devicelist");
+        spotifyHandler.dom.discoverSpinner = document.getElementById("discoverspinner");
+        spotifyHandler.dom.discoverListHolder = document.getElementById("discoverlist-holder");
+        spotifyHandler.dom.discoverList = document.getElementById("discoverlist");
         spotifyHandler.dom.volumebar = document.getElementById("volumebar");
         spotifyHandler.dom.listeningOn = document.getElementById("listeningon");
         spotifyHandler.dom.listeningOnIcon = document.getElementById("listeningon-icon");
