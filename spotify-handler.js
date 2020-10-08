@@ -117,31 +117,6 @@ var spotifyHandler = {
                             artwork: tempArtwork
                         });
                     }
-                    if (!data.item.is_local) {
-                        spotifyHandler.dom.likeButton.disabled = false;
-                        spotifyHandler.dom.likeButton.style.display = "inline-block";
-                        spotifyHandler.api.containsMySavedTracks([data.item.id], {}, function(err, data) {
-                            if (err) {
-                                console.error(err);
-                            }
-                            else if (data[0]) {
-                                spotifyHandler.dom.likeButton.innerHTML = "&#xe87d;";
-                                spotifyHandler.dom.likeButton.style.color = "#1DB954";
-                                spotifyHandler.dom.likeButton.title = "Remove from liked songs";
-                                spotifyHandler.dom.likeButton.setAttribute("data-liked", "true");
-                            }
-                            else {
-                                spotifyHandler.dom.likeButton.innerHTML = "&#xe87e;";
-                                spotifyHandler.dom.likeButton.style.color = null;
-                                spotifyHandler.dom.likeButton.title = "Add to liked songs";
-                                spotifyHandler.dom.likeButton.setAttribute("data-liked", "false");
-                            }
-                        });
-                    }
-                    else {
-                        spotifyHandler.dom.likeButton.disabled = true;
-                        spotifyHandler.dom.likeButton.style.display = "none";
-                    }
                     spotifyHandler.duration = Math.floor(data.item.duration_ms / 1000);
                 }
                 spotifyHandler.progress = Math.floor(data.progress_ms / 1000);
@@ -157,6 +132,32 @@ var spotifyHandler = {
                 else {
                     spotifyHandler.dom.playPauseButton.title = "Play";
                     spotifyHandler.dom.playPauseButton.innerHTML = "&#xe038;";
+                }
+
+                if (!data.item.is_local) {
+                    spotifyHandler.dom.likeButton.disabled = false;
+                    spotifyHandler.dom.likeButton.style.display = "inline-block";
+                    spotifyHandler.api.containsMySavedTracks([data.item.id], {}, function(err, data) {
+                        if (err) {
+                            console.error(err);
+                        }
+                        else if (data[0]) {
+                            spotifyHandler.dom.likeButton.innerHTML = "&#xe87d;";
+                            spotifyHandler.dom.likeButton.style.color = "#1DB954";
+                            spotifyHandler.dom.likeButton.title = "Remove from liked songs";
+                            spotifyHandler.dom.likeButton.setAttribute("data-liked", "true");
+                        }
+                        else {
+                            spotifyHandler.dom.likeButton.innerHTML = "&#xe87e;";
+                            spotifyHandler.dom.likeButton.style.color = null;
+                            spotifyHandler.dom.likeButton.title = "Add to liked songs";
+                            spotifyHandler.dom.likeButton.setAttribute("data-liked", "false");
+                        }
+                    });
+                }
+                else {
+                    spotifyHandler.dom.likeButton.disabled = true;
+                    spotifyHandler.dom.likeButton.style.display = "none";
                 }
 
                 if (data.shuffle_state) {
@@ -222,7 +223,7 @@ var spotifyHandler = {
                 var tempList = "";
                 for (var i = 0; i < data.devices.length; i++) {
                     if (data.devices[i].is_active) {
-                        spotifyHandler.dom.listeningOn.innerHTML = data.devices[i].name;
+                        spotifyHandler.dom.listeningOn.innerHTML = stripTags(data.devices[i].name);
                         spotifyHandler.dom.listeningOnIcon.innerHTML = getDeviceIcon(data.devices[i].type.toLowerCase());
                         if (data.devices[i].volume_percent != null) {
                             spotifyHandler.dom.volumebar.disabled = false;
@@ -230,6 +231,12 @@ var spotifyHandler = {
                         }
                         else {
                             spotifyHandler.dom.volumebar.disabled = true;
+                        }
+                        if (data.devices.length > 1) {
+                            spotifyHandler.dom.devicesButton.setAttribute("data-curdevice", stripTags(data.devices[i].name));
+                        }
+                        else {
+                            spotifyHandler.dom.devicesButton.setAttribute("data-curdevice", "");
                         }
                     }
                     else {
@@ -335,6 +342,9 @@ var spotifyHandler = {
                     spotifyHandler.dom.playPauseButton.disabled = false;
                     spotifyHandler.dom.playPauseButton.innerHTML = "&#xe038;";
                     spotifyHandler.dom.playPauseButton.title = "Play";
+                    setTimeout(function() {
+                        spotifyHandler.setCurrentlyPlaying();
+                    }, 250);
                 });
             }
             else {
@@ -342,6 +352,9 @@ var spotifyHandler = {
                     spotifyHandler.dom.playPauseButton.disabled = false;
                     spotifyHandler.dom.playPauseButton.innerHTML = "&#xe035;";
                     spotifyHandler.dom.playPauseButton.title = "Pause";
+                    setTimeout(function() {
+                        spotifyHandler.setCurrentlyPlaying();
+                    }, 250);
                 });
             }
         });

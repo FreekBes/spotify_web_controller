@@ -410,6 +410,20 @@ button[disabled] {
     color: #B3B3B3;
 }
 
+#devices-button::after {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+    text-align: left;
+    font-family: Roboto, Verdana, Arial, Sans-Serif;
+    font-size: 13px;
+    content: attr(data-curdevice);
+    width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 #playlist-button {
     float: right;
 }
@@ -559,7 +573,7 @@ h2 {
     position: relative;
 }
 
-.dotted::after {
+.dotted::before {
     content: '';
     display: block;
     position: absolute;
@@ -574,6 +588,6 @@ h2 {
     background: #1DB954;
 }
 
-.side-button.dotted::after {
+.side-button.dotted::before {
     bottom: 7px;
 }
