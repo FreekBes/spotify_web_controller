@@ -17,13 +17,20 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <link rel="manifest" href="manifest.json" />
         <title>Spotify Remote Web Controller</title>
+        <meta name="description" content="A web controller for Spotify, targeted for Android Go, because I've heard the official Spotify application runs like shit and sometimes you just wanna control what's playing without getting up from bed or something">
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="theme-color" content="#1DB954" />
+        <meta name="application-name" content="Spotify Remote Web Controller">
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-title" content="Spotify Remote Web Controller" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+        <meta name="browsermode" content="application">
+        <meta name="screen-orientation" content="portrait">
+
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <style><?php readfile("styles.css"); ?></style>
         <script>var state = <?PHP echo $_SESSION["state"]; ?>;</script>
