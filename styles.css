@@ -171,14 +171,14 @@ p {
 
 #playing-from {
     text-transform: uppercase;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 1px;
     text-overflow: ellipsis;
     overflow: hidden;
 }
 
 #playing-from-name {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
     text-overflow: ellipsis;
     overflow: hidden;
