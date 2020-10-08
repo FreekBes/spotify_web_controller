@@ -99,7 +99,7 @@
                     <button class="material-icons skip-button" id="previous-button" title="Previous">&#xe045;</button>
                     <button class="material-icons main-button" id="play-pause-button" title="Play">&#xe038;</button>
                     <button class="material-icons skip-button" id="next-button" title="Next">&#xe044;</button>
-                    <button class="material-icons side-button" id="loop-button" title="Loop">&#xe040;</button>
+                    <button class="material-icons side-button" id="repeat-button" title="Repeat">&#xe040;</button>
                 </div>
                 <div id="bottombar">
                     <button class="material-icons bar-button" id="devices-button" title="Spotify Connect">&#xe32e;</button>

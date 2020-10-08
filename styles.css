@@ -410,21 +410,6 @@ button[disabled] {
     color: #B3B3B3;
 }
 
-#devices-button.multiple::after {
-    content: '';
-    display: block;
-    position: relative;
-    left: 50%;
-    left: calc(50% - 2px);
-    left: -webkit-calc(50% - 2px);
-    left: -moz-calc(50% - 2px);
-    bottom: -4px;
-    width: 4px;
-    height: 4px;
-    border-radius: 2px;
-    background: #1DB954;
-}
-
 #playlist-button {
     float: right;
 }
@@ -568,4 +553,27 @@ h2 {
 #discover-disclaimer {
     margin-bottom: 64px;
     padding: 16px;
+}
+
+.dotted {
+    position: relative;
+}
+
+.dotted::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    left: calc(50% - 2px);
+    left: -webkit-calc(50% - 2px);
+    left: -moz-calc(50% - 2px);
+    bottom: 0;
+    width: 4px;
+    height: 4px;
+    border-radius: 2px;
+    background: #1DB954;
+}
+
+.side-button.dotted::after {
+    bottom: 7px;
 }

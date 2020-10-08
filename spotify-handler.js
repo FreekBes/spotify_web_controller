@@ -21,11 +21,11 @@ var spotifyHandler = {
     },
 
     setCurrentlyPlaying: function() {
-        spotifyHandler.api.getMyCurrentPlayingTrack({}, function(err, data) {
+        spotifyHandler.api.getMyCurrentPlaybackState({}, function(err, data) {
             if (err) {
                 console.error(err);
             }
-            else if (data != undefined && typeof data != "string") {
+            else if (data != undefined && typeof data != "string" && data.item != null) {
                 // console.log(data);
                 spotifyHandler.lastPlaybackStatus = data;
                 if (pageHandler.shown == "discoverpage") {
@@ -149,6 +149,7 @@ var spotifyHandler = {
                     progressBar.setValue((data.progress_ms / data.item.duration_ms) * 100);
                     spotifyHandler.updateTimes(spotifyHandler.progress, spotifyHandler.duration);
                 }
+                
                 if (data.is_playing) {
                     spotifyHandler.dom.playPauseButton.title = "Pause";
                     spotifyHandler.dom.playPauseButton.innerHTML = "&#xe035;";
@@ -156,6 +157,34 @@ var spotifyHandler = {
                 else {
                     spotifyHandler.dom.playPauseButton.title = "Play";
                     spotifyHandler.dom.playPauseButton.innerHTML = "&#xe038;";
+                }
+
+                if (data.shuffle_state) {
+                    spotifyHandler.dom.shuffleButton.style.color = "#1DB954";
+                    spotifyHandler.dom.shuffleButton.className = "material-icons side-button dotted";
+                }
+                else {
+                    spotifyHandler.dom.shuffleButton.style.color = null;
+                    spotifyHandler.dom.shuffleButton.className = "material-icons side-button";
+                }
+
+                switch (data.repeat_state) {
+                    case "context":
+                        spotifyHandler.dom.repeatButton.style.color = "#1DB954";
+                        spotifyHandler.dom.repeatButton.innerHTML = "&#xe040;";
+                        spotifyHandler.dom.repeatButton.className = "material-icons side-button dotted";
+                        break;
+                    case "track":
+                        spotifyHandler.dom.repeatButton.style.color = "#1DB954";
+                        spotifyHandler.dom.repeatButton.innerHTML = "&#xe041;";
+                        spotifyHandler.dom.repeatButton.className = "material-icons side-button dotted";
+                        break;
+                    default:
+                    case "off":
+                        spotifyHandler.dom.repeatButton.style.color = null;
+                        spotifyHandler.dom.repeatButton.innerHTML = "&#xe040;";
+                        spotifyHandler.dom.repeatButton.className = "material-icons side-button";
+                        break;
                 }
             }
             else {
@@ -212,7 +241,7 @@ var spotifyHandler = {
                 spotifyHandler.dom.deviceList.innerHTML = tempList;
                 if (data.devices.length > 1) {
                     spotifyHandler.dom.deviceListHolder.style.display = "block";
-                    spotifyHandler.dom.devicesButton.className = "material-icons bar-button multiple";
+                    spotifyHandler.dom.devicesButton.className = "material-icons bar-button dotted";
                 }
                 else {
                     spotifyHandler.dom.deviceListHolder.style.display = "none";
@@ -369,6 +398,39 @@ var spotifyHandler = {
         });
         spotifyHandler.dom.devicesButton.addEventListener("click", function(event) {
             pageHandler.showPage("devicespage");
+        });
+        spotifyHandler.dom.shuffleButton.addEventListener("click", function(event) {
+            spotifyHandler.dom.shuffleButton.disabled = true;
+            spotifyHandler.api.setShuffle(!spotifyHandler.lastPlaybackStatus.shuffle_state, {}, function(err, data) {
+                spotifyHandler.dom.shuffleButton.disabled = false;
+                if (err) {
+                    console.error(err);
+                }
+                else {
+                    setTimeout(function() {
+                        spotifyHandler.setCurrentlyPlaying();
+                    }, 250);
+                }
+            });
+        });
+        spotifyHandler.dom.repeatButton.addEventListener("click", function(event) {
+            spotifyHandler.dom.repeatButton.disabled = true;
+            var newState = {
+                off: "context",
+                context: "track",
+                track: "off"
+            };
+            spotifyHandler.api.setRepeat(newState[spotifyHandler.lastPlaybackStatus.repeat_state], {}, function(err, data) {
+                spotifyHandler.dom.repeatButton.disabled = false;
+                if (err) {
+                    console.error(err);
+                }
+                else {
+                    setTimeout(function() {
+                        spotifyHandler.setCurrentlyPlaying();
+                    }, 250);
+                }
+            });
         });
 
         if ('mediaSession' in navigator)
