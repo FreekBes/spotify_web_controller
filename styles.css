@@ -500,7 +500,7 @@ button[disabled] {
 
 #volumebar-holder {
     position: absolute;
-    bottom: 0px;
+    bottom: 8px;
     left: 0px;
     right: 0px;
     padding: 8px;
