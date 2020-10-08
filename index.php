@@ -103,7 +103,7 @@
                 </div>
                 <div id="bottombar">
                     <button class="material-icons bar-button" id="devices-button" title="Spotify Connect" data-curdevice="">&#xe32e;</button>
-                    <button class="material-icons bar-button" id="playlist-button" title="Queue">&#xe05f;</button>
+                    <!--<button class="material-icons bar-button" id="playlist-button" title="Queue">&#xe05f;</button>-->
                 </div>
             </div>
         </div>

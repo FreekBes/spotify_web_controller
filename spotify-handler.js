@@ -305,7 +305,6 @@ var spotifyHandler = {
         spotifyHandler.dom.nextButton = document.getElementById("next-button");
         spotifyHandler.dom.repeatButton = document.getElementById("repeat-button");
         spotifyHandler.dom.devicesButton = document.getElementById("devices-button");
-        spotifyHandler.dom.playlistButton = document.getElementById("playlist-button");
         spotifyHandler.dom.deviceListHolder = document.getElementById("devicelist-holder");
         spotifyHandler.dom.deviceList = document.getElementById("devicelist");
         spotifyHandler.dom.volumebar = document.getElementById("volumebar");
