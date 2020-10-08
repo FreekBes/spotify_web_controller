@@ -226,9 +226,7 @@ var spotifyHandler = {
                         spotifyHandler.dom.listeningOnIcon.innerHTML = getDeviceIcon(data.devices[i].type.toLowerCase());
                         if (data.devices[i].volume_percent != null) {
                             spotifyHandler.dom.volumebar.disabled = false;
-                            if (spotifyHandler.dom.volumebar.value != data.devices[i].volume_percent) {
-                                spotifyHandler.setVolume(data.devices[i].volume_percent, true);
-                            }
+                            spotifyHandler.setVolume(data.devices[i].volume_percent, true);
                         }
                         else {
                             spotifyHandler.dom.volumebar.disabled = true;
