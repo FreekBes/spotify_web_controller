@@ -64,7 +64,7 @@
                 <ul id="devicelist"></ul>
             </div>
             <div id="volumebar-holder">
-                <div id="volumebar-icon" class="material-icons">&#xe050;</div><input id="volumebar" type="range" min="0" max="100" value="100" step="1" onmouseup="spotifyHandler.setVolume(this.value, false);" ontouchend="spotifyHandler.setVolume(this.value, false);" />
+                <div id="volumebar-icon" class="material-icons">&#xe050;</div><input id="volumebar" type="range" min="0" max="100" value="50" step="1" />
             </div>
             <button id="devicespageclose-button" class="material-icons close-button" onclick="pageHandler.showPage('playerpage');">&#xe5cd;</button>
         </div>
