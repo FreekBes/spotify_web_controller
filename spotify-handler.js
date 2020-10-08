@@ -403,9 +403,11 @@ var spotifyHandler = {
         spotifyHandler.dom.volumebar = document.getElementById("volumebar");
         spotifyHandler.dom.listeningOn = document.getElementById("listeningon");
         spotifyHandler.dom.listeningOnIcon = document.getElementById("listeningon-icon");
+        spotifyHandler.dom.themeColor = document.querySelector("meta[name=theme-color]");
         window.addEventListener("resize", spotifyHandler.fixArtSize);
         spotifyHandler.dom.artwork.addEventListener("loadstart", function(event) {
             spotifyHandler.dom.playerPage.style.background = null;
+            spotifyHandler.dom.themeColor.setAttribute("content", "#1DB954");
         });
         spotifyHandler.dom.artwork.addEventListener("load", function(event) {
             spotifyHandler.fixArtSize();
@@ -414,17 +416,21 @@ var spotifyHandler = {
                 var swatches = vibrant.swatches();
                 if (swatches.Vibrant != undefined) {
                     spotifyHandler.dom.playerPage.style.background = "linear-gradient(rgba("+swatches.Vibrant.rgb.join(",")+",0.7), #15161A 75%)";
+                    spotifyHandler.dom.themeColor.setAttribute("content", swatches.Vibrant.getHex());
                 }
                 else if (swatches.Muted != undefined) {
                     spotifyHandler.dom.playerPage.style.background = "linear-gradient(rgba("+swatches.Muted.rgb.join(",")+",0.7), #15161A 75%)";
+                    spotifyHandler.dom.themeColor.setAttribute("content", swatches.Muted.getHex());
                 }
                 else {
                     console.log(swatches);
                     spotifyHandler.dom.playerPage.style.background = null;
+                    spotifyHandler.dom.themeColor.setAttribute("content", "#1DB954");
                 }
             }
             else {
                 spotifyHandler.dom.playerPage.style.background = null;
+                spotifyHandler.dom.themeColor.setAttribute("content", "#1DB954");
             }
         });
         spotifyHandler.dom.playPauseButton.addEventListener("click", function(event) {
