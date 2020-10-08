@@ -137,6 +137,14 @@ var spotifyHandler = {
                         progressBar.setValue((data.progress_ms / data.item.duration_ms) * 100);
                         spotifyHandler.updateTimes(spotifyHandler.progress, spotifyHandler.duration);
                     }
+
+                    if (data.device.volume_percent != null) {
+                        spotifyHandler.dom.volumebar.disabled = false;
+                        spotifyHandler.setVolume(data.device.volume_percent, true);
+                    }
+                    else {
+                        spotifyHandler.dom.volumebar.disabled = true;
+                    }
                     
                     if (data.is_playing) {
                         spotifyHandler.dom.playPauseButton.title = "Pause";
@@ -246,13 +254,6 @@ var spotifyHandler = {
                         if (data.devices[i].is_active) {
                             spotifyHandler.dom.listeningOn.innerHTML = stripTags(data.devices[i].name);
                             spotifyHandler.dom.listeningOnIcon.innerHTML = getDeviceIcon(data.devices[i].type.toLowerCase());
-                            if (data.devices[i].volume_percent != null) {
-                                spotifyHandler.dom.volumebar.disabled = false;
-                                spotifyHandler.setVolume(data.devices[i].volume_percent, true);
-                            }
-                            else {
-                                spotifyHandler.dom.volumebar.disabled = true;
-                            }
                             if (data.devices.length > 1) {
                                 spotifyHandler.dom.devicesButton.setAttribute("data-curdevice", stripTags(data.devices[i].name));
                             }
