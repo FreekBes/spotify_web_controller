@@ -206,7 +206,7 @@ var spotifyHandler = {
                         }
                     }
                     else {
-                        tempList += '<li class="devicelist-item"><span class="devicelist-icon material-icons">'+getDeviceIcon(data.devices[i].type.toLowerCase())+'</span><span class="devicelist-name">'+data.devices[i].name+'</span></li>';
+                        tempList += '<li class="devicelist-item" onclick="spotifyHandler.transferPlayback(\''+data.devices[i].id+'\')"><span class="devicelist-icon material-icons">'+getDeviceIcon(data.devices[i].type.toLowerCase())+'</span><span class="devicelist-name">'+data.devices[i].name+'</span></li>';
                     }
                 }
                 spotifyHandler.dom.deviceList.innerHTML = tempList;
@@ -229,6 +229,26 @@ var spotifyHandler = {
         }
         if (!volumebarOnly) {
             spotifyHandler.api.setVolume(newVolume, {});
+        }
+    },
+
+    transferringPlayback: false,
+    transferPlayback: function(deviceId) {
+        if (!spotifyHandler.transferringPlayback) {
+            spotifyHandler.transferringPlayback = true;
+            spotifyHandler.api.transferMyPlayback([deviceId], {}, function(err, data) {
+                if (err) {
+                    console.error(err);
+                    spotifyHandler.transferringPlayback = false;
+                }
+                else {
+                    console.log("Moved playback");
+                    setTimeout(function() {
+                        spotifyHandler.refreshDevices();
+                        spotifyHandler.transferringPlayback = false;
+                    }, 500);
+                }
+            });
         }
     },
 
