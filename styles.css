@@ -1,0 +1,394 @@
+html, body {
+    display: block;
+    padding: 0px;
+    margin: 0px;
+    background-color: #191414;
+    color: #FFFFFF;
+    font-family: Roboto, Verdana, Arial, Sans-Serif;
+    font-size: 16px;
+    cursor: default;
+    height: 100%;
+    width: 100%;
+    user-select: none;
+}
+
+a, a:visited {
+    color: #1DB954;
+    transition: color .15s ease;
+}
+
+a:hover {
+    color: #1ed760;
+}
+
+.page {
+    display: none;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.page.active {
+    display: block;
+}
+
+.bigbutton {
+	display: block;
+	margin: 24px auto 8px auto;
+	font-size: 14px;
+	line-height: 1.5;
+	border-radius: 500px;
+	padding: 7px 35px 7px;
+	color: #ffffff;
+	background-color: #2ebd59;
+	transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+	border-width: 0;
+	letter-spacing: 1.2px;
+	min-width: 130px;
+	text-transform: uppercase;
+	white-space: normal;
+	border: 1px solid;
+	border-color: #29a84f;
+	text-align: center;
+	-ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	text-decoration: none;
+	-webkit-box-sizing: border-box;
+    box-sizing: border-box;
+	font-weight: 500;
+}
+
+.bigbutton:focus {
+	outline: 0;
+}
+
+.bigbutton:hover {
+	background-color: #1ed760;
+	border-color: #1d7738;
+	outline: 0;
+}
+
+.bigbutton:active {
+	background-color: #2ebd59;
+	box-shadow: none;
+	outline: 0;
+}
+
+#signinpage {
+    text-align: center;
+    padding: 96px 16px;
+}
+
+h1 {
+    margin: 8px 0px 16px 0px;
+}
+
+#welcome {
+    margin-bottom: 54px;
+}
+
+p {
+    margin: 8px 0px;
+}
+
+#signinbtn {
+    margin-top: 24px;
+}
+
+.disclaimer {
+    margin-top: 14px;
+    font-size: small;
+    color: #555555;
+}
+
+.disclaimer.footer {
+    display: block;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 8px;
+}
+
+.disclaimer a {
+    color: inherit !important;
+}
+
+.disclaimer a:hover {
+    color: #757575 !important;
+}
+
+#spinner {
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+	padding: 0px;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	
+	border: 7px solid rgba(0,0,0,0);
+	border-top: 7px solid;
+	border-top-color: #1DB954;
+	transition: border-top-color 1s;
+	border-radius: 30px;
+	animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+#playerpage {
+    background-color: #15161A;
+}
+
+#topbar {
+    display: block;
+    height: 42px;
+    padding: 8px 12px 0px 12px;
+}
+
+#playing-from-holder {
+    text-align: center;
+    height: inherit;
+    padding: 4px 0px 6px 0px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#playing-from {
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#playing-from-name {
+    font-size: 15px;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#art-holder {
+    margin: 24px;
+    text-align: center;
+}
+
+#artwork {
+    display: inline-block;
+    width: 100%;
+    object-fit: cover;
+    background: #000000;
+}
+
+#below-art-holder {
+    display: block;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 18px 24px 46px 24px;
+}
+
+#metadata-holder-holder {
+    
+}
+
+#metadata-holder {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 10px 0px 10px 8px;
+    width: 80%;
+    width: calc(100% - 62px);
+    width: -webkit-calc(100% - 62px);
+    width: -moz-calc(100% - 62px);
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#title, #artist {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#title {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+#artist {
+    color: #B3B3B3;
+    font-size: 17px;
+}
+
+#like-button {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+}
+
+#seekbar-holder {
+
+}
+
+/* seekbar */
+#progressbar-outer {
+    width: 100%;
+    height: 4px;
+    border-radius: 1px;
+    padding: 0px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    margin: 0px;
+    white-space: nowrap;
+    background-color: rgba(0,0,0,0);
+    position: relative;
+    cursor: default;
+}
+
+#progressbar-outer .progressbar-inner {
+    width: 0%;
+    height: inherit;
+    border-radius: inherit;
+    position: absolute;
+    left: 0;
+    transition: 0.25s;
+    transition-timing-function: linear;
+}
+
+#progressbar-outer #barbackground {
+    width: 100%;
+    background-color: #353942;
+    z-index: 1;
+}
+
+#progressbar-outer #progressbar {
+    background-color: #FFFFFF;
+    z-index: 3;
+}
+
+#progressbar-outer #bufferbar {
+    background-color: rgba(255,255,255,0.2);
+    z-index: 2;
+    transition-timing-function: ease;
+}
+
+#progressbar:after {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    position: absolute;
+    position: absolute;
+    right: -4px;
+    top: -2px;
+
+    animation: progresshover 0.1s 1 alternate ease-in-out;
+    animation-fill-mode: backwards;
+}
+
+#progressbar.hovering:after {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    
+    right: -5px;
+    top: -3px;
+    
+    animation: progresshover 0.1s 1 alternate ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes progresshover {
+    from {
+        
+    }
+    to {
+        width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        right: -6px;
+        top: -6px;
+    }
+}
+
+#times {
+    color: #B3B3B3;
+    font-size: 13px;
+    white-space: nowrap;
+    margin-top: -9px;
+    pointer-events: none;
+}
+
+#times > span {
+    display: inline-block;
+    width: 50%;
+    vertical-align: middle;
+}
+
+#playback-time {
+    text-align: left;
+}
+
+#duration-time {
+    text-align: right;
+}
+
+button {
+    display: inline-block;
+    vertical-align: middle;
+    border: none;
+    background: none;
+    outline: none;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+button[disabled] {
+    opacity: 0.3;
+    cursor: default;
+}
+
+#controls-holder {
+    text-align: center;
+}
+
+.main-button {
+    font-size: 76px;
+    width: 88px;
+    height: 88px;
+    margin: 0px -12px;
+    border-radius: 44px;
+}
+
+.skip-button {
+    font-size: 48px;
+    width: 60px;
+    height: 60px;
+    margin: 0px 8px;
+}
+
+.side-button {
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+}
