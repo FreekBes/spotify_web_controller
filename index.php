@@ -28,21 +28,45 @@
         <script><?php readfile("spotify-handler.js"); ?></script>
     </head>
     <body onload="spotifyHandler.init();">
-        <div class="page active" id="signinpage">
+        <div class="page active" id="loadingpage">
+            <div id="loading" style="display: table; width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px;">
+                <div style="display: table-cell; vertical-align: middle;">
+                    <div style="margin-left: auto; margin-right: auto; text-align: center;">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page" id="signinpage">
             <h1 id="welcome">Welcome to the Spotify Web Controller</h1>
             <p>You have to sign in with your Spotify account in order to control playback.</p>
             <button class="bigbutton" id="signinbtn">Sign in with Spotify</button>
             <p class="disclaimer"><small>This website uses cookies to store preferences and required user data. By clicking above button, we take that to mean that you accept their use.</small></p>
             <p class="disclaimer footer"><small>This web application is <b>not</b> owned by Spotify AB. It was instead built by <a href="https://freekbes/">Freek Bes</a> using the official <a href="https://developer.spotify.com/documentation/web-api/">Spotify Web API</a>.</small></p>
         </div>
-        <div class="page" id="loadingpage">
-            <div id="loading" style="display: table; width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px;">
+        <div class="page" id="discoverpage">
+            <div style="display: table; width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px;">
                 <div style="display: table-cell; vertical-align: middle;">
-                    <div style="margin-left: auto; margin-right: auto; text-align: center;">
-                        <div id="spinner"></div>
-                    </div>
+                    <h2>Looking for instances of Spotify...</h2>
+                    <p id="discover-disclaimer" class="disclaimer">Open Spotify on your computer, smartphone, or anything else. Once you've started playing something, you will be able to control playback here too.</p>
+                    <div class="spinner"></div>
                 </div>
             </div>
+        </div>
+        <div class="page" id="devicespage">
+            <div id="listeningon-holder">
+                <div id="listeningon-icon" class="material-icons">&#xe30a;</div>
+                <div id="listeningon-title">Listening on</div>
+                <div id="listeningon"></div>
+            </div>
+            <div id="devicelist-holder">
+                <div id="selectdevice">Select a device</div>
+                <ul id="devicelist"></ul>
+            </div>
+            <div id="volumebar-holder">
+                <div id="volumebar-icon" class="material-icons">&#xe050;</div><input id="volumebar" type="range" min="0" max="100" value="100" step="1" onmouseup="spotifyHandler.setVolume(this.value, false);" ontouchend="spotifyHandler.setVolume(this.value, false);" />
+            </div>
+            <button id="devicespageclose-button" class="material-icons close-button" onclick="pageHandler.showPage('playerpage');">&#xe5cd;</button>
         </div>
         <div class="page" id="playerpage">
             <div id="topbar">
@@ -84,5 +108,28 @@
             </div>
         </div>
         <script><?PHP readfile("progressbar.js"); ?></script>
+        <script>
+            window.onbeforeunload = function(e) {
+                pageHandler.showPage("loadingpage");
+            };
+            var changingVolume = false;
+            document.getElementById("volumebar").addEventListener("input", function(event) {
+                spotifyHandler.setVolume(event.target.value, true);
+            });
+            document.getElementById("volumebar").addEventListener("mousedown", function(event) {
+                changingVolume = true;
+            });
+            document.getElementById("volumebar").addEventListener("touchstart", function(event) {
+                changingVolume = true;
+            });
+            document.getElementById("volumebar").addEventListener("mouseup", function(event) {
+                spotifyHandler.setVolume(event.target.value, false);
+                changingVolume = false;
+            });
+            document.getElementById("volumebar").addEventListener("touchend", function(event) {
+                spotifyHandler.setVolume(event.target.value, false);
+                changingVolume = false;
+            });
+        </script>
     </body>
 </html>

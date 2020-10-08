@@ -1,7 +1,10 @@
 var pageHandler = {
+    shown: "loadingpage",
+
     showPage: function(pageId) {
         pageHandler.hidePage();
         $("#"+pageId).addClass("active");
+        pageHandler.shown = pageId;
     },
     
     hidePage: function() {
@@ -10,5 +13,6 @@ var pageHandler = {
         {
             $(pages[i]).removeClass("active");
         }
+        pageHandler.shown = null;
     }
 };

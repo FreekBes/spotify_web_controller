@@ -41,3 +41,30 @@ function formatSeconds(seconds) {
         return (u + ':' + m + ':' + s);
     }
 }
+
+function getDeviceIcon(type) {
+    switch (type) {
+        case "smartphone":
+            return "&#xe32c;";
+        case "computer":
+            return "&#xe30a;";
+        case "speaker":
+        case "avr":
+            return "&#xe32d;";
+        case "tv":
+        case "stb":
+            return "&#xe333;"
+        case "gameconsole":
+            return "&#xe30f;";
+        case "castvideo":
+        case "castaudio":
+            return "&#xe307;";
+        case "automobile":
+            return "&#xe531;";
+        case "audiodongle":
+            return "&#xe60f;";
+        case "unknown":
+        default:
+            return "&#xe337;";
+    }
+}
