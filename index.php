@@ -11,11 +11,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Spotify Web Controller</title>
+        <link rel="manifest" href="manifest.json" />
+        <title>Spotify Remote Web Controller</title>
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="theme-color" content="#1DB954" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-title" content="Spotify Web Controller" />
+        <meta name="apple-mobile-web-app-title" content="Spotify Remote Web Controller" />
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <style><?php readfile("styles.css"); ?></style>
