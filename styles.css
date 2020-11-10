@@ -164,7 +164,7 @@ p {
 #playing-from-holder {
     text-align: center;
     height: inherit;
-    padding: 4px 46px 6px 46px;
+    padding: 4px 42px 6px 42px;
     overflow: hidden;
     white-space: nowrap;
 }
@@ -563,10 +563,20 @@ button[disabled] {
 #library-button {
     position: absolute;
     top: 6px;
-    left: 8px;
+    left: 6px;
     width: 40px;
     height: 40px;
     font-size: 32px;
+    z-index: 10;
+}
+
+#search-button {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
     z-index: 10;
 }
 
@@ -637,12 +647,12 @@ h2 {
     z-index: -1;
 }
 
-#queuepage, #librarypage {
+#queuepage, #librarypage, #search-page {
     overflow-x: hidden;
     overflow-y: auto;
 }
 
-#queue-holder, #library-holder {
+#queue-holder, #library-holder, #search-holder {
     padding-top: 60px;
 }
 
@@ -660,6 +670,18 @@ h2 {
     margin: 0px;
     cursor: pointer;
     white-space: nowrap;
+}
+
+.queue-item.divider {
+    display: list-item;
+    height: auto;
+    padding: 8px 4px 8px 60px;
+    margin: 24px 8px 8px 8px;
+    cursor: default;
+    white-space: nowrap;
+    font-weight: bold;
+    font-size: 18px;
+    border-bottom: solid 1px #353942;
 }
 
 .queue-item-cover, .queue-item-metadata {
@@ -707,4 +729,23 @@ h2 {
     font-size: 13px;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+#searchbar-wrapper {
+    padding: 12px 24px;
+}
+
+#searchbar {
+    display: block;
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+    width: 100%;
+    margin: 0px;
+    padding: 4px 12px;
+    border: none;
+    outline: 0;
+    font-size: 17px;
+    height: 34px;
+    border-radius: 17px;
 }

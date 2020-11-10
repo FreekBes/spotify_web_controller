@@ -8,6 +8,9 @@ var pageHandler = {
         if (pageId == "playerpage") {
             spotifyHandler.fixArtSize();
         }
+        if (pageId == "searchpage") {
+            document.getElementById("searchbar").focus();
+        }
     },
     
     hidePage: function() {

@@ -100,6 +100,16 @@
             </div>
             <button id="librarypageclose-button" class="material-icons close-button" onclick="pageHandler.showPage('playerpage');" title="Close">&#xe5cd;</button>
         </div>
+        <div class="page" id="searchpage">
+            <h2 class="list-header">Search</h2>
+            <div id="search-holder">
+                <div id="searchbar-wrapper">
+                    <input type="text" id="searchbar" placeholder="Search Spotify" />
+                </div>
+                <ul id="search" class="tracklist"></ul>
+            </div>
+            <button id="searchpageclose-button" class="material-icons close-button" onclick="pageHandler.showPage('playerpage');" title="Close">&#xe5cd;</button>
+        </div>
         <div class="page" id="playerpage">
             <div id="topbar">
                 <button id="library-button" class="material-icons" onclick="pageHandler.showPage('librarypage');" title="View your playlists and saved albums">&#xe5cf;</button>
@@ -107,6 +117,7 @@
                     <div id="playing-from"></div>
                     <div id="playing-from-name"></div>
                 </div>
+                <button id="search-button" class="material-icons" onclick="pageHandler.showPage('searchpage');" title="Search Spotify">&#xe8b6;</button>
             </div>
             <div id="art-holder">
                 <img id="artwork" crossOrigin="anonymous" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />

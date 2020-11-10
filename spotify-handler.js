@@ -1,5 +1,5 @@
 var spotifyHandler = {
-    scopes: ["user-read-currently-playing", "user-read-playback-state", "user-modify-playback-state", "user-read-recently-played", "user-library-read", "user-library-modify", "playlist-read-private", "playlist-read-collaborative"],
+    scopes: ["user-read-private", "user-read-currently-playing", "user-read-playback-state", "user-modify-playback-state", "user-read-recently-played", "user-library-read", "user-library-modify", "playlist-read-private", "playlist-read-collaborative"],
     accessToken: null,
     expires: -1,
     api: new SpotifyWebApi(),
@@ -332,6 +332,8 @@ var spotifyHandler = {
                 spotifyHandler.dom.queueButton.disabled = true;
                 spotifyHandler.lastQueueId = id;
                 spotifyHandler.lastQueueType = type;
+                spotifyHandler.queueOffset = 0;
+                spotifyHandler.queueTotal = undefined;
                 spotifyHandler.dom.queue.innerHTML = "";
                 spotifyHandler.fetchQueueTracks(type, id, 0);
             }
@@ -395,32 +397,38 @@ var spotifyHandler = {
         }
     },
 
-    addQueueTracks: function(tracks, forceCover) {
-        var trackElem = null;
+    createTrackItem: function(tempTrack, doCover, inCurrentContext) {
+        var trackElem = document.createElement("li");
         var tempArtists = [];
+        trackElem.className = "queue-item";
+        trackElem.setAttribute("data-uri", tempTrack.uri);
+        if (inCurrentContext) {
+            trackElem.setAttribute("data-context", "spotify:"+spotifyHandler.lastQueueType+":"+spotifyHandler.lastQueueId);
+        }
+        else {
+            trackElem.setAttribute("data-context", tempTrack.album.uri);
+        }
+        trackElem.setAttribute("onclick", "spotifyHandler.playContext(this.getAttribute('data-context'), this.getAttribute('data-uri'));");
+        tempArtists = [];
+        for (var j = 0; j < tempTrack.artists.length; j++) {
+            tempArtists.push(stripTags(tempTrack.artists[j].name));
+        }
+        trackElem.innerHTML = (doCover ? '<div class="queue-item-cover"><img src="'+(tempTrack.album.images.length > 0 ? tempTrack.album.images.pop().url : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')+'"></div>': '<div class="queue-item-cover"><span>'+(tempTrack.disc_number > 1 ? tempTrack.disc_number+'-' : '')+tempTrack.track_number+'</span></div>')+'<div class="queue-item-metadata"><div class="queue-item-name">'+stripTags(tempTrack.name)+'</div><div class="queue-item-artist">'+tempArtists.join(', ')+'</div></div>';
+        spotifyHandler.dom.queue.appendChild(trackElem);
+        return (trackElem);
+    },
+
+    addQueueTracks: function(tracks, doCover) {
         var tempTrack = {};
-        var doCover = false;
         for (var i = 0; i < tracks.length; i++) {
-            trackElem = document.createElement("li");
-            trackElem.className = "queue-item";
+            
             tempTrack = tracks[i];
             if ("track" in tempTrack) {
                 tempTrack = tempTrack.track;
                 doCover = true;
             }
             if (tempTrack.uri != null && tempTrack.uri.indexOf(":local:") == -1) {
-                if (forceCover) {
-                    doCover = true;
-                }
-                trackElem.setAttribute("data-uri", tempTrack.uri);
-                trackElem.setAttribute("data-context", "spotify:"+spotifyHandler.lastQueueType+":"+spotifyHandler.lastQueueId);
-                trackElem.setAttribute("onclick", "spotifyHandler.playContext(this.getAttribute('data-context'), this.getAttribute('data-uri'));");
-                tempArtists = [];
-                for (var j = 0; j < tempTrack.artists.length; j++) {
-                    tempArtists.push(tempTrack.artists[j].name);
-                }
-                trackElem.innerHTML = (doCover ? '<div class="queue-item-cover"><img src="'+(tempTrack.album.images.length > 0 ? tempTrack.album.images.pop().url : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')+'"></div>': '<div class="queue-item-cover"><span>'+(tempTrack.disc_number > 1 ? tempTrack.disc_number+'-' : '')+tempTrack.track_number+'</span></div>')+'<div class="queue-item-metadata"><div class="queue-item-name">'+tempTrack.name+'</div><div class="queue-item-artist">'+tempArtists.join(', ')+'</div></div>';
-                spotifyHandler.dom.queue.appendChild(trackElem);
+                spotifyHandler.dom.queue.appendChild(spotifyHandler.createTrackItem(tempTrack, doCover));
             }
         }
     },
@@ -471,6 +479,8 @@ var spotifyHandler = {
     playlistsOffset: 0,
     loadLibrary: function() {
         spotifyHandler.dom.library.innerHTML = "";
+        spotifyHandler.playlistsOffset = 0;
+        spotifyHandler.playlistsTotal = undefined;
         spotifyHandler.fetchPlaylists(0);
     },
 
@@ -511,24 +521,80 @@ var spotifyHandler = {
         }
     },
 
+    createPlaylistOrAlbumItem: function(tempData) {
+        playlistElem = document.createElement("li");
+        playlistElem.className = "queue-item";
+        playlistElem.setAttribute("data-uri", tempData.uri);
+        tempArtists = [];
+        if ("artists" in tempData) {
+            for (var j = 0; j < tempData.artists.length; j++) {
+                tempArtists.push(stripTags(tempData.artists[j].name));
+            }
+        }
+        playlistElem.setAttribute("onclick", "spotifyHandler.playContext(this.getAttribute('data-uri'), null); pageHandler.showPage('playerpage');");
+        playlistElem.innerHTML = '<div class="queue-item-cover"><img src="'+(tempData.images.length > 0 ? tempData.images.pop().url : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')+'"></div><div class="queue-item-metadata"><div class="queue-item-name">'+stripTags(tempData.name)+'</div><div class="queue-item-artist">'+("artists" in tempData ? tempArtists.join(", ") : 'by '+stripTags(tempData.owner.display_name))+'</div></div>';
+        return (playlistElem);
+    },
+
     addPlaylists: function(data) {
         for (var i = 0; i < data.length; i++) {
             tempData = data[i];
             if ("album" in tempData) {
                 tempData = tempData.album;
             }
-            playlistElem = document.createElement("li");
-            playlistElem.className = "queue-item";
-            playlistElem.setAttribute("data-uri", tempData.uri);
-            tempArtists = [];
-            if ("artists" in tempData) {
-                for (var j = 0; j < tempData.artists.length; j++) {
-                    tempArtists.push(tempData.artists[j].name);
+            spotifyHandler.dom.library.appendChild(spotifyHandler.createPlaylistOrAlbumItem(tempData));
+        }
+    },
+
+    createDividerItem: function(content) {
+        divider = document.createElement("li");
+        divider.className = "queue-item divider";
+        divider.innerHTML = content;
+        return (divider);
+    },
+
+    searchReq: null,
+    search: function(q) {
+        if (spotifyHandler.searchReq != null) {
+            spotifyHandler.searchReq.abort();
+        }
+        if (q.trim() != "")
+        {
+            spotifyHandler.searchReq = spotifyHandler.api.search(q.trim(), ["track", "album", "playlist"], {offset: 0, limit: 12, market: "from_token"});
+            spotifyHandler.searchReq.then(function(data) {
+                console.log("Search results are in", data);
+                spotifyHandler.dom.search.innerHTML = "";
+                var anyResults = false;
+                if (data.tracks.items.length > 0) {
+                    spotifyHandler.dom.search.appendChild(spotifyHandler.createDividerItem("Tracks"));
+                    for (var i = 0; i < data.tracks.items.length; i++) {
+                        spotifyHandler.dom.search.appendChild(spotifyHandler.createTrackItem(data.tracks.items[i], true));
+                    }
+                    anyResults = true;
                 }
-            }
-            playlistElem.setAttribute("onclick", "spotifyHandler.playContext(this.getAttribute('data-uri'), null); pageHandler.showPage('playerpage');");
-            playlistElem.innerHTML = '<div class="queue-item-cover"><img src="'+(tempData.images.length > 0 ? tempData.images.pop().url : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')+'"></div><div class="queue-item-metadata"><div class="queue-item-name">'+tempData.name+'</div><div class="queue-item-artist">'+("artists" in tempData ? tempArtists.join(", ") : 'by '+tempData.owner.display_name)+'</div></div>';
-            spotifyHandler.dom.library.appendChild(playlistElem);
+                if (data.albums.items.length > 0) {
+                    spotifyHandler.dom.search.appendChild(spotifyHandler.createDividerItem("Albums"));
+                    for (var i = 0; i < data.albums.items.length; i++) {
+                        spotifyHandler.dom.search.appendChild(spotifyHandler.createPlaylistOrAlbumItem(data.albums.items[i], true));
+                    }
+                    anyResults = true;
+                }
+                if (data.playlists.items.length > 0) {
+                    spotifyHandler.dom.search.appendChild(spotifyHandler.createDividerItem("Playlists"));
+                    for (var i = 0; i < data.playlists.items.length; i++) {
+                        spotifyHandler.dom.search.appendChild(spotifyHandler.createPlaylistOrAlbumItem(data.playlists.items[i], true));
+                    }
+                    anyResults = true;
+                }
+                if (!anyResults) {
+                    spotifyHandler.dom.search.appendChild(spotifyHandler.createDividerItem("No results found for \""+stripTags(q.trim())+"\""));
+                }
+            }, function(err) {
+                // console.error(err);
+            });
+        }
+        else {
+            spotifyHandler.dom.search.innerHTML = "";
         }
     },
 
@@ -566,6 +632,9 @@ var spotifyHandler = {
         spotifyHandler.dom.themeColor = document.querySelector("meta[name=theme-color]");
         spotifyHandler.dom.library = document.getElementById("library");
         spotifyHandler.dom.libraryPage = document.getElementById("librarypage");
+        spotifyHandler.dom.search = document.getElementById("search");
+        spotifyHandler.dom.searchPage = document.getElementById("searchpage");
+        spotifyHandler.dom.searchBar = document.getElementById("searchbar");
         window.addEventListener("resize", spotifyHandler.fixArtSize);
         spotifyHandler.dom.artwork.addEventListener("loadstart", function(event) {
             spotifyHandler.dom.playerPage.style.background = null;
@@ -719,6 +788,10 @@ var spotifyHandler = {
                 console.log("Scrolled near the end of library, fetching more playlists");
                 spotifyHandler.fetchPlaylists(spotifyHandler.playlistsOffset);
             }
+        });
+
+        spotifyHandler.dom.searchBar.addEventListener("input", function(event) {
+            spotifyHandler.search(event.target.value);
         });
 
         if ('mediaSession' in navigator)
