@@ -428,7 +428,7 @@ var spotifyHandler = {
                 doCover = true;
             }
             if (tempTrack.uri != null && tempTrack.uri.indexOf(":local:") == -1) {
-                spotifyHandler.dom.queue.appendChild(spotifyHandler.createTrackItem(tempTrack, doCover));
+                spotifyHandler.dom.queue.appendChild(spotifyHandler.createTrackItem(tempTrack, doCover, true));
             }
         }
     },
@@ -568,7 +568,6 @@ var spotifyHandler = {
                 if (data.tracks.items.length > 0) {
                     spotifyHandler.dom.search.appendChild(spotifyHandler.createDividerItem("Tracks"));
                     for (var i = 0; i < data.tracks.items.length; i++) {
-                        spotifyHandler.dom.search.appendChild(spotifyHandler.createTrackItem(data.tracks.items[i], true));
                     }
                     anyResults = true;
                 }
