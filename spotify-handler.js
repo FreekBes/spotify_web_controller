@@ -323,6 +323,8 @@ var spotifyHandler = {
     },
 
     fetchingQueue: false,
+    queueTotal: undefined,
+    queueOffset: 0,
     fillQueue: function(type, id) {
         if (id != null)
         {
@@ -383,11 +385,11 @@ var spotifyHandler = {
             console.log("Queue retrieved", data);
             if (data.items) {
                 spotifyHandler.addQueueTracks(data.items, false);
-                spotifyHandler.queueOffset = data.offset + data.items.length;
+                spotifyHandler.queueOffset += data.items.length;
             }
             else if (data.tracks) {
                 spotifyHandler.addQueueTracks(data.tracks, true);
-                spotifyHandler.queueOffset = data.offset + data.tracks.length;
+                spotifyHandler.queueOffset += data.tracks.length;
             }
             spotifyHandler.queueTotal = data.total;
         }
@@ -475,8 +477,6 @@ var spotifyHandler = {
     fetchPlaylists: function(offset) {
         if (spotifyHandler.fetchingPlaylists != true) {
             spotifyHandler.fetchingPlaylists = true;
-            console.log(offset);
-            console.log(spotifyHandler.playlistsOffset);
             if (offset < spotifyHandler.playlistsOffset || (offset == 0 && spotifyHandler.playlistsTotal == undefined)) {
                 spotifyHandler.api.getUserPlaylists({offset: offset, limit: 50}, spotifyHandler.handleFetchedPlaylists);
             }
@@ -500,8 +500,14 @@ var spotifyHandler = {
         else {
             console.log("Playlists or albums fetched", data);
             spotifyHandler.addPlaylists(data.items);
-            spotifyHandler.playlistsOffset = data.offset + data.items.length;
-            spotifyHandler.playlistsTotal = data.total;
+            spotifyHandler.playlistsOffset += data.items.length;
+            if (data.href.indexOf("me/albums") == -1) {
+                spotifyHandler.playlistsTotal = data.total;
+            }
+            else if (data.offset == data.total) {
+                // workaround to stop fetching albums from library once all have been fetched
+                spotifyHandler.fetchingPlaylists = true;
+            }
         }
     },
 
