@@ -28,7 +28,7 @@ var spotifyHandler = {
                     console.error(err);
                 }
                 else if (data != undefined && typeof data != "string" && data.item != null) {
-                    console.log(data);
+                    // console.log(data);
                     spotifyHandler.lastPlaybackStatus = data;
                     if (pageHandler.shown == "discoverpage") {
                         pageHandler.showPage("playerpage");
