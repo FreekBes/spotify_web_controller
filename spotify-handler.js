@@ -477,8 +477,10 @@ var spotifyHandler = {
     fetchingPlaylists: false,
     playlistsTotal: undefined,
     playlistsOffset: 0,
+    firstAlbumFetched: false,
     loadLibrary: function() {
         spotifyHandler.dom.library.innerHTML = "";
+        spotifyHandler.dom.library.appendChild(spotifyHandler.createDividerItem("Playlists"));
         spotifyHandler.playlistsOffset = 0;
         spotifyHandler.playlistsTotal = undefined;
         spotifyHandler.fetchPlaylists(0);
@@ -491,6 +493,10 @@ var spotifyHandler = {
                 spotifyHandler.api.getUserPlaylists({offset: offset, limit: 50}, spotifyHandler.handleFetchedPlaylists);
             }
             else {
+                if (!spotifyHandler.firstAlbumFetched) {
+                    spotifyHandler.dom.library.appendChild(spotifyHandler.createDividerItem("Albums"));
+                    spotifyHandler.firstAlbumFetched = true;
+                }
                 offset = offset - spotifyHandler.playlistsTotal;
                 if (offset >= 0) {
                     spotifyHandler.api.getMySavedAlbums({offset: offset, limit: 50, country: "from_token"}, spotifyHandler.handleFetchedPlaylists);
