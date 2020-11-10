@@ -1,5 +1,5 @@
 var spotifyHandler = {
-    scopes: ["user-read-currently-playing", "user-read-playback-state", "user-modify-playback-state", "user-read-recently-played", "user-library-read", "user-library-modify"],
+    scopes: ["user-read-currently-playing", "user-read-playback-state", "user-modify-playback-state", "user-read-recently-played", "user-library-read", "user-library-modify", "playlist-read-private", "playlist-read-collaborative"],
     accessToken: null,
     expires: -1,
     api: new SpotifyWebApi(),
@@ -413,7 +413,7 @@ var spotifyHandler = {
                 }
                 trackElem.setAttribute("data-uri", tempTrack.uri);
                 trackElem.setAttribute("data-context", "spotify:"+spotifyHandler.lastQueueType+":"+spotifyHandler.lastQueueId);
-                trackElem.setAttribute("onclick", "spotifyHandler.skipToTrack(this.getAttribute('data-context'), this.getAttribute('data-uri'));");
+                trackElem.setAttribute("onclick", "spotifyHandler.playContext(this.getAttribute('data-context'), this.getAttribute('data-uri'));");
                 tempArtists = [];
                 for (var j = 0; j < tempTrack.artists.length; j++) {
                     tempArtists.push(tempTrack.artists[j].name);
@@ -424,8 +424,13 @@ var spotifyHandler = {
         }
     },
 
-    skipToTrack: function(contextUri, trackUri) {
-        if (contextUri != null && contextUri != "spotify:library:library") {
+    playContext: function(contextUri, trackUri) {
+        if (trackUri == null) {
+            spotifyHandler.api.play({
+                context_uri: contextUri
+            });
+        }
+        else if (contextUri != null && contextUri != "spotify:library:library") {
             spotifyHandler.api.play({
                 context_uri: contextUri,
                 offset: {
@@ -460,6 +465,46 @@ var spotifyHandler = {
         });
     },
 
+    fetchingPlaylists: false,
+    loadLibrary: function() {
+        spotifyHandler.dom.library.innerHTML = "";
+        spotifyHandler.fetchPlaylists(0);
+    },
+
+    fetchPlaylists: function(offset) {
+        if (spotifyHandler.fetchingPlaylists != true) {
+            spotifyHandler.fetchingPlaylists = true;
+            spotifyHandler.api.getUserPlaylists({offset: offset, limit: 50}, spotifyHandler.handleFetchedPlaylists);
+        }
+        else {
+            console.warn("Already fetching playlists!");
+        }
+    },
+
+    handleFetchedPlaylists: function(err, data) {
+        spotifyHandler.fetchingPlaylists = false;
+        if (err) {
+            console.error(err);
+        }
+        else {
+            console.log(data);
+            spotifyHandler.addPlaylists(data.items);
+            spotifyHandler.playlistsOffset = data.offset + data.items.length;
+            spotifyHandler.playlistsTotal = data.total;
+        }
+    },
+
+    addPlaylists: function(playlists) {
+        for (var i = 0; i < playlists.length; i++) {
+            playlistElem = document.createElement("li");
+            playlistElem.className = "queue-item";
+            playlistElem.setAttribute("data-uri", playlists[i].uri);
+            playlistElem.setAttribute("onclick", "spotifyHandler.playContext(this.getAttribute('data-uri'), null); pageHandler.showPage('playerpage');");
+            playlistElem.innerHTML = '<div class="queue-item-cover"><img src="'+(playlists[i].images.length > 0 ? playlists[i].images.pop().url : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')+'"></div><div class="queue-item-metadata"><div class="queue-item-name">'+playlists[i].name+'</div><div class="queue-item-artist">by '+playlists[i].owner.display_name+'</div></div>';
+            spotifyHandler.dom.library.appendChild(playlistElem);
+        }
+    },
+
     init: function() {
         document.getElementById("signinbtn").addEventListener("click", spotifyHandler.signIn);
 
@@ -492,6 +537,8 @@ var spotifyHandler = {
         spotifyHandler.dom.listeningOn = document.getElementById("listeningon");
         spotifyHandler.dom.listeningOnIcon = document.getElementById("listeningon-icon");
         spotifyHandler.dom.themeColor = document.querySelector("meta[name=theme-color]");
+        spotifyHandler.dom.library = document.getElementById("library");
+        spotifyHandler.dom.libraryPage = document.getElementById("librarypage");
         window.addEventListener("resize", spotifyHandler.fixArtSize);
         spotifyHandler.dom.artwork.addEventListener("loadstart", function(event) {
             spotifyHandler.dom.playerPage.style.background = null;
@@ -640,6 +687,13 @@ var spotifyHandler = {
             }
         });
 
+        spotifyHandler.dom.libraryPage.addEventListener("scroll", function(event) {
+            if (event.target.offsetHeight + event.target.scrollTop + 1280 >= event.target.scrollHeight && spotifyHandler.fetchingPlaylists != true && spotifyHandler.playlistsOffset < spotifyHandler.playlistsTotal) {
+                console.log("Scrolled near the end of queue, fetching more tracks");
+                spotifyHandler.fetchPlaylists(spotifyHandler.playlistsOffset);
+            }
+        });
+
         if ('mediaSession' in navigator)
         {
             navigator.mediaSession.metadata = new MediaMetadata({});
@@ -674,6 +728,7 @@ var spotifyHandler = {
                 pageHandler.showPage("playerpage");
                 spotifyHandler.setCurrentlyPlaying();
                 spotifyHandler.refreshDevices();
+                spotifyHandler.loadLibrary();
             }
             else if ("error" in hash && parseInt(hash["state"]) == state) {
                 if (hash["error"] == "access_denied") {

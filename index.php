@@ -87,14 +87,22 @@
             <button id="devicespageclose-button" class="material-icons close-button" onclick="pageHandler.showPage('playerpage');">&#xe5cd;</button>
         </div>
         <div class="page" id="queuepage">
-            <h2 id="contextname"></h2>
+            <h2 id="contextname" class="list-header"></h2>
             <div id="queue-holder">
                 <ul id="queue" class="tracklist"></ul>
             </div>
             <button id="queuepageclose-button" class="material-icons close-button" onclick="pageHandler.showPage('playerpage');">&#xe5cd;</button>
         </div>
+        <div class="page" id="librarypage">
+            <h2 class="list-header">Library</h2>
+            <div id="library-holder">
+                <ul id="library" class="tracklist"></ul>
+            </div>
+            <button id="librarypageclose-button" class="material-icons close-button" onclick="pageHandler.showPage('playerpage');">&#xe5cd;</button>
+        </div>
         <div class="page" id="playerpage">
             <div id="topbar">
+                <button id="library-button" class="material-icons" onclick="pageHandler.showPage('librarypage');">&#xe5cf;</button>
                 <div id="playing-from-holder">
                     <div id="playing-from"></div>
                     <div id="playing-from-name"></div>
