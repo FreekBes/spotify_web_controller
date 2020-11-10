@@ -271,7 +271,7 @@ p {
     border-radius: inherit;
     position: absolute;
     left: 0;
-    transition: 0.25s;
+    transition: 0.5s;
     transition-timing-function: linear;
 }
 

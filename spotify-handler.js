@@ -751,6 +751,13 @@ var spotifyHandler = {
                 setInterval(spotifyHandler.checkAccessToken, 1000);
                 setInterval(spotifyHandler.refreshDevices, 5000);
                 setInterval(spotifyHandler.setCurrentlyPlaying, 1000);
+                setTimeout(function() {
+                    setInterval(function() {
+                        if (spotifyHandler.lastPlaybackStatus.is_playing) {
+                            progressBar.setValue(((spotifyHandler.lastPlaybackStatus.progress_ms + 500) / spotifyHandler.lastPlaybackStatus.item.duration_ms) * 100);
+                        }
+                    }, 1000);
+                }, 500);
                 spotifyHandler.api.setAccessToken(hash["access_token"]);
                 pageHandler.showPage("playerpage");
                 spotifyHandler.setCurrentlyPlaying();
