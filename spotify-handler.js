@@ -568,6 +568,7 @@ var spotifyHandler = {
                 if (data.tracks.items.length > 0) {
                     spotifyHandler.dom.search.appendChild(spotifyHandler.createDividerItem("Tracks"));
                     for (var i = 0; i < data.tracks.items.length; i++) {
+                        spotifyHandler.dom.search.appendChild(spotifyHandler.createTrackItem(data.tracks.items[i], true, false));
                     }
                     anyResults = true;
                 }
