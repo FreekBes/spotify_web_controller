@@ -82,27 +82,27 @@
                 <ul id="devicelist"></ul>
             </div>
             <div id="volumebar-holder">
-                <div id="volumebar-icon" class="material-icons">&#xe050;</div><input id="volumebar" type="range" min="0" max="100" value="50" step="1" />
+                <div id="volumebar-icon" class="material-icons">&#xe050;</div><input id="volumebar" type="range" min="0" max="100" value="50" step="1" title="Volume" />
             </div>
-            <button id="devicespageclose-button" class="material-icons close-button" onclick="pageHandler.showPage('playerpage');">&#xe5cd;</button>
+            <button id="devicespageclose-button" class="material-icons close-button" onclick="pageHandler.showPage('playerpage');" title="Close">&#xe5cd;</button>
         </div>
         <div class="page" id="queuepage">
             <h2 id="contextname" class="list-header"></h2>
             <div id="queue-holder">
                 <ul id="queue" class="tracklist"></ul>
             </div>
-            <button id="queuepageclose-button" class="material-icons close-button" onclick="pageHandler.showPage('playerpage');">&#xe5cd;</button>
+            <button id="queuepageclose-button" class="material-icons close-button" onclick="pageHandler.showPage('playerpage');" title="Close">&#xe5cd;</button>
         </div>
         <div class="page" id="librarypage">
-            <h2 class="list-header">Library</h2>
+            <h2 class="list-header">Playlists &amp; albums</h2>
             <div id="library-holder">
                 <ul id="library" class="tracklist"></ul>
             </div>
-            <button id="librarypageclose-button" class="material-icons close-button" onclick="pageHandler.showPage('playerpage');">&#xe5cd;</button>
+            <button id="librarypageclose-button" class="material-icons close-button" onclick="pageHandler.showPage('playerpage');" title="Close">&#xe5cd;</button>
         </div>
         <div class="page" id="playerpage">
             <div id="topbar">
-                <button id="library-button" class="material-icons" onclick="pageHandler.showPage('librarypage');">&#xe5cf;</button>
+                <button id="library-button" class="material-icons" onclick="pageHandler.showPage('librarypage');" title="View your playlists and saved albums">&#xe5cf;</button>
                 <div id="playing-from-holder">
                     <div id="playing-from"></div>
                     <div id="playing-from-name"></div>
@@ -135,7 +135,7 @@
                     <button class="material-icons side-button" id="repeat-button" title="Repeat">&#xe040;</button>
                 </div>
                 <div id="bottombar">
-                    <button class="material-icons bar-button" id="devices-button" title="Spotify Connect" data-curdevice="">&#xe32e;</button>
+                    <button class="material-icons bar-button" id="devices-button" title="Available devices" data-curdevice="">&#xe32e;</button>
                     <button class="material-icons bar-button" id="queue-button" title="Queue" disabled>&#xe05f;</button>
                 </div>
             </div>
