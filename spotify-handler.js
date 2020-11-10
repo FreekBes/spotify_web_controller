@@ -402,8 +402,7 @@ var spotifyHandler = {
             trackElem = document.createElement("li");
             trackElem.className = "queue-item";
             tempTrack = tracks[i];
-            if ("track" in tempTrack)
-            {
+            if ("track" in tempTrack) {
                 tempTrack = tempTrack.track;
                 doCover = true;
             }
@@ -466,6 +465,8 @@ var spotifyHandler = {
     },
 
     fetchingPlaylists: false,
+    playlistsTotal: undefined,
+    playlistsOffset: 0,
     loadLibrary: function() {
         spotifyHandler.dom.library.innerHTML = "";
         spotifyHandler.fetchPlaylists(0);
@@ -474,7 +475,17 @@ var spotifyHandler = {
     fetchPlaylists: function(offset) {
         if (spotifyHandler.fetchingPlaylists != true) {
             spotifyHandler.fetchingPlaylists = true;
-            spotifyHandler.api.getUserPlaylists({offset: offset, limit: 50}, spotifyHandler.handleFetchedPlaylists);
+            console.log(offset);
+            console.log(spotifyHandler.playlistsOffset);
+            if (offset < spotifyHandler.playlistsOffset || (offset == 0 && spotifyHandler.playlistsTotal == undefined)) {
+                spotifyHandler.api.getUserPlaylists({offset: offset, limit: 50}, spotifyHandler.handleFetchedPlaylists);
+            }
+            else {
+                offset = offset - spotifyHandler.playlistsTotal;
+                if (offset >= 0) {
+                    spotifyHandler.api.getMySavedAlbums({offset: offset, limit: 50, country: "from_token"}, spotifyHandler.handleFetchedPlaylists);
+                }
+            }
         }
         else {
             console.warn("Already fetching playlists!");
@@ -487,20 +498,30 @@ var spotifyHandler = {
             console.error(err);
         }
         else {
-            console.log(data);
+            console.log("Playlists or albums fetched", data);
             spotifyHandler.addPlaylists(data.items);
             spotifyHandler.playlistsOffset = data.offset + data.items.length;
             spotifyHandler.playlistsTotal = data.total;
         }
     },
 
-    addPlaylists: function(playlists) {
-        for (var i = 0; i < playlists.length; i++) {
+    addPlaylists: function(data) {
+        for (var i = 0; i < data.length; i++) {
+            tempData = data[i];
+            if ("album" in tempData) {
+                tempData = tempData.album;
+            }
             playlistElem = document.createElement("li");
             playlistElem.className = "queue-item";
-            playlistElem.setAttribute("data-uri", playlists[i].uri);
+            playlistElem.setAttribute("data-uri", tempData.uri);
+            tempArtists = [];
+            if ("artists" in tempData) {
+                for (var j = 0; j < tempData.artists.length; j++) {
+                    tempArtists.push(tempData.artists[j].name);
+                }
+            }
             playlistElem.setAttribute("onclick", "spotifyHandler.playContext(this.getAttribute('data-uri'), null); pageHandler.showPage('playerpage');");
-            playlistElem.innerHTML = '<div class="queue-item-cover"><img src="'+(playlists[i].images.length > 0 ? playlists[i].images.pop().url : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')+'"></div><div class="queue-item-metadata"><div class="queue-item-name">'+playlists[i].name+'</div><div class="queue-item-artist">by '+playlists[i].owner.display_name+'</div></div>';
+            playlistElem.innerHTML = '<div class="queue-item-cover"><img src="'+(tempData.images.length > 0 ? tempData.images.pop().url : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')+'"></div><div class="queue-item-metadata"><div class="queue-item-name">'+tempData.name+'</div><div class="queue-item-artist">'+("artists" in tempData ? tempArtists.join(", ") : 'by '+tempData.owner.display_name)+'</div></div>';
             spotifyHandler.dom.library.appendChild(playlistElem);
         }
     },
@@ -688,8 +709,8 @@ var spotifyHandler = {
         });
 
         spotifyHandler.dom.libraryPage.addEventListener("scroll", function(event) {
-            if (event.target.offsetHeight + event.target.scrollTop + 1280 >= event.target.scrollHeight && spotifyHandler.fetchingPlaylists != true && spotifyHandler.playlistsOffset < spotifyHandler.playlistsTotal) {
-                console.log("Scrolled near the end of queue, fetching more tracks");
+            if (event.target.offsetHeight + event.target.scrollTop + 1280 >= event.target.scrollHeight && spotifyHandler.fetchingPlaylists != true) {
+                console.log("Scrolled near the end of library, fetching more playlists");
                 spotifyHandler.fetchPlaylists(spotifyHandler.playlistsOffset);
             }
         });
