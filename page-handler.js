@@ -5,6 +5,9 @@ var pageHandler = {
         pageHandler.hidePage();
         $("#"+pageId).addClass("active");
         pageHandler.shown = pageId;
+        if (pageId == "playerpage") {
+            spotifyHandler.fixArtSize();
+        }
     },
     
     hidePage: function() {

@@ -557,6 +557,7 @@ button[disabled] {
     width: 40px;
     height: 40px;
     font-size: 32px;
+    z-index: 10;
 }
 
 #discoverpage {
@@ -599,9 +600,101 @@ h2 {
 }
 
 #contextname {
+    display: block;
     padding-top: 14px;
-    padding-right: 56px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 80%;
+    width: calc(100% - 66px);
+    width: -webkit-calc(100% - 66px);
+    width: -moz-calc(100% - 66px);
+    z-index: 2;
+}
+
+#contextname::before {
+    content: '';
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    background: linear-gradient(#191414, #191414, rgba(0,0,0,0));
+    width: 200%;
+    height: 60px;
+    z-index: -1;
+}
+
+#queuepage {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#queue-holder {
+    padding-top: 60px;
+}
+
+#queue {
+    text-align: left;
+    padding: 0px;
+    margin: 10px 0px;
+    list-style-type: none;
+}
+
+.queue-item {
+    display: list-item;
+    height: 48px;
+    padding: 8px 12px;
+    margin: 0px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.queue-item-cover, .queue-item-metadata {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.queue-item-cover {
+    width: 48px;
+    height: 48px;
+    margin-right: 9px;
+}
+
+.queue-item-cover img {
+    object-fit: cover;
+    width: inherit;
+    height: inherit;
+}
+
+.queue-item-cover span {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    line-height: 48px;
+    color: #B3B3B3;
+    font-size: 13px;
+}
+
+.queue-item-metadata {
+    padding: 6px 0px;
+    width: 75%;
+    width: calc(100% - 60px);
+    width: -webkit-calc(100% - 60px);
+    width: -moz-calc(100% - 60px);
+}
+
+.queue-item-name {
+    font-size: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.queue-item-artist {
+    color: #B3B3B3;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
