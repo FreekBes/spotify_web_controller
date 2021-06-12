@@ -489,7 +489,7 @@ var spotifyHandler = {
 	fetchPlaylists: function(offset) {
 		if (spotifyHandler.fetchingPlaylists != true) {
 			spotifyHandler.fetchingPlaylists = true;
-			if (offset < spotifyHandler.playlistsOffset || (offset == 0 && spotifyHandler.playlistsTotal == undefined)) {
+			if (offset < spotifyHandler.playlistsTotal || (offset == 0 && spotifyHandler.playlistsTotal == undefined)) {
 				spotifyHandler.api.getUserPlaylists({offset: offset, limit: 50}, spotifyHandler.handleFetchedPlaylists);
 			}
 			else {
