@@ -56,7 +56,7 @@
             <p>You have to sign in with your Spotify account in order to control playback.</p>
             <button class="bigbutton" id="signinbtn">Sign in with Spotify</button>
             <p class="disclaimer"><small>This website uses cookies to store preferences and required user data. By clicking above button, we take that to mean that you accept their use.</small></p>
-            <p class="disclaimer footer"><small>This web application is <b>not</b> owned by Spotify AB. It was instead built by <a href="https://freekbes/">Freek Bes</a> using the official <a href="https://developer.spotify.com/documentation/web-api/">Spotify Web API</a>.</small></p>
+            <p class="disclaimer footer"><small>This web application is <b>not</b> owned by Spotify AB. It was instead built by <a href="https://freekb.es/">Freek Bes</a> using the official <a href="https://developer.spotify.com/documentation/web-api/">Spotify Web API</a>.</small></p>
         </div>
         <div class="page" id="discoverpage">
             <div style="display: table; width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px;">
