@@ -10,5 +10,11 @@
 	"display": "standalone",
 	"orientation": "portrait",
 	"background_color": "#191414",
-	"theme_color": "#1DB954"
+	"theme_color": "#1DB954",
+	"icons": [
+		{
+			"src": "icon.png",
+			"sizes": "256x256"
+		}
+	]
 }

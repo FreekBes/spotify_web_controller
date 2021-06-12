@@ -24,6 +24,10 @@
 		<meta name="mobile-web-app-capable" content="yes" />
 		<meta name="theme-color" content="#1DB954" />
 		<meta name="application-name" content="Spotify Remote Web Controller">
+		<meta name="og:image" content="https://freekb.es/spotify/icon.png" />
+		<meta property="og:image" content="https://freekb.es/spotify/icon.png" />
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+		<link rel="icon" type="image/ico" href="favicon.ico" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-title" content="Spotify Remote Web Controller" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
