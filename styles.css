@@ -1,39 +1,39 @@
 html, body {
-    display: block;
-    padding: 0px;
-    margin: 0px;
-    background-color: #191414;
-    color: #FFFFFF;
-    font-family: Roboto, Verdana, Arial, Sans-Serif;
-    font-size: 16px;
-    cursor: default;
-    height: 100%;
-    width: 100%;
-    user-select: none;
+	display: block;
+	padding: 0px;
+	margin: 0px;
+	background-color: #191414;
+	color: #FFFFFF;
+	font-family: Roboto, Verdana, Arial, Sans-Serif;
+	font-size: 16px;
+	cursor: default;
+	height: 100%;
+	width: 100%;
+	user-select: none;
 }
 
 a, a:visited {
-    color: #1DB954;
-    transition: color .15s ease;
+	color: #1DB954;
+	transition: color .15s ease;
 }
 
 a:hover {
-    color: #1ed760;
+	color: #1ed760;
 }
 
 .page {
-    display: none;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    height: 100%;
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
+	display: none;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
 }
 
 .page.active {
-    display: block;
+	display: block;
 }
 
 .bigbutton {
@@ -55,16 +55,16 @@ a:hover {
 	border-color: #29a84f;
 	text-align: center;
 	-ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    background-image: none;
+	touch-action: manipulation;
+	cursor: pointer;
+	background-image: none;
 	-webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 	text-decoration: none;
 	-webkit-box-sizing: border-box;
-    box-sizing: border-box;
+	box-sizing: border-box;
 	font-weight: 500;
 }
 
@@ -85,47 +85,47 @@ a:hover {
 }
 
 #signinpage {
-    text-align: center;
-    padding: 96px 16px;
+	text-align: center;
+	padding: 96px 16px;
 }
 
 h1 {
-    margin: 8px 0px 16px 0px;
+	margin: 8px 0px 16px 0px;
 }
 
 #welcome {
-    margin-bottom: 54px;
+	margin-bottom: 54px;
 }
 
 p {
-    margin: 8px 0px;
+	margin: 8px 0px;
 }
 
 #signinbtn {
-    margin-top: 24px;
+	margin-top: 24px;
 }
 
 .disclaimer {
-    margin-top: 14px;
-    font-size: small;
-    color: #555555;
+	margin-top: 14px;
+	font-size: small;
+	color: #555555;
 }
 
 .disclaimer.footer {
-    display: block;
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    padding: 8px;
+	display: block;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	padding: 8px;
 }
 
 .disclaimer a {
-    color: inherit !important;
+	color: inherit !important;
 }
 
 .disclaimer a:hover {
-    color: #757575 !important;
+	color: #757575 !important;
 }
 
 .spinner {
@@ -151,99 +151,99 @@ p {
 }
 
 #playerpage {
-    background-color: #15161A;
+	background-color: #15161A;
 }
 
 #topbar {
-    display: block;
-    height: 42px;
-    padding: 8px 12px 0px 12px;
-    white-space: nowrap;
+	display: block;
+	height: 42px;
+	padding: 8px 12px 0px 12px;
+	white-space: nowrap;
 }
 
 #playing-from-holder {
-    text-align: center;
-    height: inherit;
-    padding: 4px 42px 6px 42px;
-    overflow: hidden;
-    white-space: nowrap;
+	text-align: center;
+	height: inherit;
+	padding: 4px 42px 6px 42px;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 #playing-from {
-    text-transform: uppercase;
-    font-size: 10px;
-    letter-spacing: 1px;
-    text-overflow: ellipsis;
-    overflow: hidden;
+	text-transform: uppercase;
+	font-size: 10px;
+	letter-spacing: 1px;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 #playing-from-name {
-    font-size: 13px;
-    font-weight: bold;
-    text-overflow: ellipsis;
-    overflow: hidden;
+	font-size: 13px;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 #art-holder {
-    margin: 24px;
-    text-align: center;
+	margin: 24px;
+	text-align: center;
 }
 
 #artwork {
-    display: inline-block;
-    width: 100%;
-    object-fit: cover;
-    background: #000000;
-    pointer-events: none;
+	display: inline-block;
+	width: 100%;
+	object-fit: cover;
+	background: #000000;
+	pointer-events: none;
 }
 
 #below-art-holder {
-    display: block;
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    padding: 18px 24px 28px 24px;
+	display: block;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	padding: 18px 24px 28px 24px;
 }
 
 #metadata-holder-holder {
-    
+	
 }
 
 #metadata-holder {
-    display: inline-block;
-    vertical-align: middle;
-    padding: 10px 0px 10px 8px;
-    width: 80%;
-    width: calc(100% - 62px);
-    width: -webkit-calc(100% - 62px);
-    width: -moz-calc(100% - 62px);
-    overflow: hidden;
-    white-space: nowrap;
+	display: inline-block;
+	vertical-align: middle;
+	padding: 10px 0px 10px 8px;
+	width: 80%;
+	width: calc(100% - 62px);
+	width: -webkit-calc(100% - 62px);
+	width: -moz-calc(100% - 62px);
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 #title, #artist {
-    text-overflow: ellipsis;
-    overflow: hidden;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 #title {
-    font-size: 19px;
-    font-weight: bold;
+	font-size: 19px;
+	font-weight: bold;
 }
 
 #artist {
-    color: #B3B3B3;
-    font-size: 17px;
+	color: #B3B3B3;
+	font-size: 17px;
 }
 
 #like-button {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 8px;
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 8px;
+	width: 40px;
+	height: 40px;
+	font-size: 24px;
 }
 
 #seekbar-holder {
@@ -252,500 +252,500 @@ p {
 
 /* seekbar */
 #progressbar-outer {
-    width: 100%;
-    height: 4px;
-    border-radius: 1px;
-    padding: 0px;
-    padding-top: 14px;
-    padding-bottom: 14px;
-    margin: 0px;
-    white-space: nowrap;
-    background-color: rgba(0,0,0,0);
-    position: relative;
-    cursor: default;
+	width: 100%;
+	height: 4px;
+	border-radius: 1px;
+	padding: 0px;
+	padding-top: 14px;
+	padding-bottom: 14px;
+	margin: 0px;
+	white-space: nowrap;
+	background-color: rgba(0,0,0,0);
+	position: relative;
+	cursor: default;
 }
 
 #progressbar-outer .progressbar-inner {
-    width: 0%;
-    height: inherit;
-    border-radius: inherit;
-    position: absolute;
-    left: 0;
-    transition: 0.5s;
-    transition-timing-function: linear;
+	width: 0%;
+	height: inherit;
+	border-radius: inherit;
+	position: absolute;
+	left: 0;
+	transition: 0.5s;
+	transition-timing-function: linear;
 }
 
 #progressbar-outer #barbackground {
-    width: 100%;
-    background-color: #353942;
-    z-index: 1;
+	width: 100%;
+	background-color: #353942;
+	z-index: 1;
 }
 
 #progressbar-outer #progressbar {
-    background-color: #FFFFFF;
-    z-index: 3;
+	background-color: #FFFFFF;
+	z-index: 3;
 }
 
 #progressbar-outer #bufferbar {
-    background-color: rgba(255,255,255,0.2);
-    z-index: 2;
-    transition-timing-function: ease;
+	background-color: rgba(255,255,255,0.2);
+	z-index: 2;
+	transition-timing-function: ease;
 }
 
 #progressbar:after {
-    content: '';
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 4px;
-    background-color: #FFFFFF;
-    position: absolute;
-    position: absolute;
-    right: -4px;
-    top: -2px;
+	content: '';
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	border-radius: 4px;
+	background-color: #FFFFFF;
+	position: absolute;
+	position: absolute;
+	right: -4px;
+	top: -2px;
 
-    animation: progresshover 0.1s 1 alternate ease-in-out;
-    animation-fill-mode: backwards;
+	animation: progresshover 0.1s 1 alternate ease-in-out;
+	animation-fill-mode: backwards;
 }
 
 #progressbar.hovering:after {
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
-    
-    right: -5px;
-    top: -3px;
-    
-    animation: progresshover 0.1s 1 alternate ease-in-out;
-    animation-fill-mode: forwards;
+	width: 10px;
+	height: 10px;
+	border-radius: 5px;
+	
+	right: -5px;
+	top: -3px;
+	
+	animation: progresshover 0.1s 1 alternate ease-in-out;
+	animation-fill-mode: forwards;
 }
 
 @keyframes progresshover {
-    from {
-        
-    }
-    to {
-        width: 16px;
-        height: 16px;
-        border-radius: 8px;
-        right: -6px;
-        top: -6px;
-    }
+	from {
+		
+	}
+	to {
+		width: 16px;
+		height: 16px;
+		border-radius: 8px;
+		right: -6px;
+		top: -6px;
+	}
 }
 
 #times {
-    color: #B3B3B3;
-    font-size: 13px;
-    white-space: nowrap;
-    margin-top: -9px;
-    pointer-events: none;
+	color: #B3B3B3;
+	font-size: 13px;
+	white-space: nowrap;
+	margin-top: -9px;
+	pointer-events: none;
 }
 
 #times > span {
-    display: inline-block;
-    width: 50%;
-    vertical-align: middle;
+	display: inline-block;
+	width: 50%;
+	vertical-align: middle;
 }
 
 #playback-time {
-    text-align: left;
+	text-align: left;
 }
 
 #duration-time {
-    text-align: right;
+	text-align: right;
 }
 
 button {
-    display: inline-block;
-    vertical-align: middle;
-    border: none;
-    background: none;
-    outline: none;
-    color: #FFFFFF;
-    cursor: pointer;
+	display: inline-block;
+	vertical-align: middle;
+	border: none;
+	background: none;
+	outline: none;
+	color: #FFFFFF;
+	cursor: pointer;
 }
 
 button[disabled] {
-    opacity: 0.3;
-    cursor: default;
+	opacity: 0.3;
+	cursor: default;
 }
 
 #controls-holder {
-    text-align: center;
-    white-space: nowrap;
+	text-align: center;
+	white-space: nowrap;
 }
 
 .main-button {
-    font-size: 76px;
-    width: 88px;
-    height: 88px;
-    margin: 0px -12px;
-    border-radius: 44px;
+	font-size: 76px;
+	width: 88px;
+	height: 88px;
+	margin: 0px -12px;
+	border-radius: 44px;
 }
 
 .skip-button {
-    font-size: 48px;
-    width: 60px;
-    height: 60px;
-    margin: 0px 8px;
+	font-size: 48px;
+	width: 60px;
+	height: 60px;
+	margin: 0px 8px;
 }
 
 .side-button {
-    font-size: 20px;
-    width: 50px;
-    height: 50px;
+	font-size: 20px;
+	width: 50px;
+	height: 50px;
 }
 
 #bottombar {
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 .bar-button {
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
+	width: 40px;
+	height: 40px;
+	font-size: 24px;
 }
 
 #devices-button {
-    color: #B3B3B3;
+	color: #B3B3B3;
 }
 
 #devices-button::after {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 4px;
-    text-align: left;
-    font-family: Roboto, Verdana, Arial, Sans-Serif;
-    font-size: 13px;
-    content: attr(data-curdevice);
-    max-width: 170px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 4px;
+	text-align: left;
+	font-family: Roboto, Verdana, Arial, Sans-Serif;
+	font-size: 13px;
+	content: attr(data-curdevice);
+	max-width: 170px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 #queue-button {
-    float: right;
+	float: right;
 }
 
 #listeningon-holder {
-    padding: 56px 16px 24px 16px;
-    height: 48px;
+	padding: 56px 16px 24px 16px;
+	height: 48px;
 }
 
 #listeningon-title {
-    font-weight: bold;
-    font-size: 21px;
-    margin: 2px 0px;
+	font-weight: bold;
+	font-size: 21px;
+	margin: 2px 0px;
 }
 
 #listeningon-icon {
-    float: left;
-    color: #1DB954;
-    width: 48px;
-    height: 48px;
-    padding: 9px;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    font-size: 30px;
-    text-align: center;
-    margin-right: 16px;
+	float: left;
+	color: #1DB954;
+	width: 48px;
+	height: 48px;
+	padding: 9px;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	font-size: 30px;
+	text-align: center;
+	margin-right: 16px;
 }
 
 #listeningon {
-    color: #1DB954;
+	color: #1DB954;
 }
 
 #devicelist-holder, #discoverlist-holder {
-    padding: 16px;
+	padding: 16px;
 }
 
 #discoverlist-holder {
-    max-width: 500px;
-    margin: 0 auto;
+	max-width: 500px;
+	margin: 0 auto;
 }
 
 .selectdevice {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 #devicelist, #discoverlist {
-    text-align: left;
-    padding: 0px;
-    margin: 10px 0px;
-    list-style-type: none;
+	text-align: left;
+	padding: 0px;
+	margin: 10px 0px;
+	list-style-type: none;
 }
 
 .devicelist-item {
-    display: list-item;
-    padding: 12px 0px;
-    margin: 0px;
-    cursor: pointer;
+	display: list-item;
+	padding: 12px 0px;
+	margin: 0px;
+	cursor: pointer;
 }
 
 .devicelist-icon {
-    display: inline-block;
-    font-size: 30px;
-    width: 48px;
-    text-align: center;
-    margin-right: 16px;
-    vertical-align: middle;
+	display: inline-block;
+	font-size: 30px;
+	width: 48px;
+	text-align: center;
+	margin-right: 16px;
+	vertical-align: middle;
 }
 
 .devicelist-name {
-    display: inline-block;
-    vertical-align: middle;
+	display: inline-block;
+	vertical-align: middle;
 }
 
 #volumebar-holder {
-    position: absolute;
-    bottom: 8px;
-    left: 0px;
-    right: 0px;
-    padding: 8px;
+	position: absolute;
+	bottom: 8px;
+	left: 0px;
+	right: 0px;
+	padding: 8px;
 }
 
 #volumebar-icon {
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 24px;
-    text-align: center;
-    padding: 8px 0px;
-    width: 40px;
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 24px;
+	text-align: center;
+	padding: 8px 0px;
+	width: 40px;
 }
 
 #volumebar {
-    display: inline-block;
-    vertical-align: middle;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 80%;
-    width: calc(100% - 64px);
-    width: -webkit-calc(100% - 64px);
-    width: -moz-calc(100% - 64px);
-    height: 4px;
-    border-radius: 2px;
-    outline: none;
-    background-color: #353942;
-    background: linear-gradient(to right, #1DB954 0%, #1DB954 50%, #353942 50%, #353942 100%);
+	display: inline-block;
+	vertical-align: middle;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	width: 80%;
+	width: calc(100% - 64px);
+	width: -webkit-calc(100% - 64px);
+	width: -moz-calc(100% - 64px);
+	height: 4px;
+	border-radius: 2px;
+	outline: none;
+	background-color: #353942;
+	background: linear-gradient(to right, #1DB954 0%, #1DB954 50%, #353942 50%, #353942 100%);
 }
 
 #volumebar::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 14px;
-    height: 14px;
-    border-radius: 7px;
-    background: #FFFFFF;
-    cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+	width: 14px;
+	height: 14px;
+	border-radius: 7px;
+	background: #FFFFFF;
+	cursor: pointer;
 }
 
 #volumebar::-moz-range-thumb {
-    width: 14px;
-    height: 14px;
-    border-radius: 7px;
-    background: #FFFFFF;
-    cursor: pointer;
+	width: 14px;
+	height: 14px;
+	border-radius: 7px;
+	background: #FFFFFF;
+	cursor: pointer;
 }
 
 .close-button {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 40px;
-    height: 40px;
-    font-size: 32px;
-    z-index: 10;
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	width: 40px;
+	height: 40px;
+	font-size: 32px;
+	z-index: 10;
 }
 
 #library-button {
-    position: absolute;
-    top: 6px;
-    left: 6px;
-    width: 40px;
-    height: 40px;
-    font-size: 32px;
-    z-index: 10;
+	position: absolute;
+	top: 6px;
+	left: 6px;
+	width: 40px;
+	height: 40px;
+	font-size: 32px;
+	z-index: 10;
 }
 
 #search-button {
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    width: 40px;
-    height: 40px;
-    font-size: 25px;
-    z-index: 10;
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	width: 40px;
+	height: 40px;
+	font-size: 25px;
+	z-index: 10;
 }
 
 #discoverpage {
-    text-align: center;
+	text-align: center;
 }
 
 h2 {
-    padding: 32px 16px 16px 16px;
-    margin: 0px;
-    font-size: 24px;
-    font-weight: bold;
+	padding: 32px 16px 16px 16px;
+	margin: 0px;
+	font-size: 24px;
+	font-weight: bold;
 }
 
 #discover-disclaimer {
-    margin-bottom: 64px;
-    padding: 16px;
+	margin-bottom: 64px;
+	padding: 16px;
 }
 
 .dotted {
-    position: relative;
+	position: relative;
 }
 
 .dotted::before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 50%;
-    left: calc(50% - 2px);
-    left: -webkit-calc(50% - 2px);
-    left: -moz-calc(50% - 2px);
-    bottom: 0;
-    width: 4px;
-    height: 4px;
-    border-radius: 2px;
-    background: #1DB954;
+	content: '';
+	display: block;
+	position: absolute;
+	left: 50%;
+	left: calc(50% - 2px);
+	left: -webkit-calc(50% - 2px);
+	left: -moz-calc(50% - 2px);
+	bottom: 0;
+	width: 4px;
+	height: 4px;
+	border-radius: 2px;
+	background: #1DB954;
 }
 
 .side-button.dotted::before {
-    bottom: 7px;
+	bottom: 7px;
 }
 
 .list-header {
-    display: block;
-    padding-top: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 80%;
-    width: calc(100% - 66px);
-    width: -webkit-calc(100% - 66px);
-    width: -moz-calc(100% - 66px);
-    z-index: 2;
+	display: block;
+	padding-top: 14px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 80%;
+	width: calc(100% - 66px);
+	width: -webkit-calc(100% - 66px);
+	width: -moz-calc(100% - 66px);
+	z-index: 2;
 }
 
 .list-header::before {
-    content: '';
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    background: linear-gradient(#191414, #191414, rgba(0,0,0,0));
-    width: 200%;
-    height: 60px;
-    z-index: -1;
+	content: '';
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	background: linear-gradient(#191414, #191414, rgba(0,0,0,0));
+	width: 200%;
+	height: 60px;
+	z-index: -1;
 }
 
 #queuepage, #librarypage, #search-page {
-    overflow-x: hidden;
-    overflow-y: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 #queue-holder, #library-holder, #search-holder {
-    padding-top: 60px;
+	padding-top: 60px;
 }
 
 .tracklist {
-    text-align: left;
-    padding: 0px;
-    margin: 10px 0px;
-    list-style-type: none;
+	text-align: left;
+	padding: 0px;
+	margin: 10px 0px;
+	list-style-type: none;
 }
 
 .queue-item {
-    display: list-item;
-    height: 48px;
-    padding: 8px 12px;
-    margin: 0px;
-    cursor: pointer;
-    white-space: nowrap;
+	display: list-item;
+	height: 48px;
+	padding: 8px 12px;
+	margin: 0px;
+	cursor: pointer;
+	white-space: nowrap;
 }
 
 .queue-item.divider {
-    display: list-item;
-    height: auto;
-    padding: 8px 4px 8px 60px;
-    margin: 24px 8px 8px 8px;
-    cursor: default;
-    white-space: nowrap;
-    font-weight: bold;
-    font-size: 18px;
-    border-bottom: solid 1px #353942;
+	display: list-item;
+	height: auto;
+	padding: 8px 4px 8px 60px;
+	margin: 24px 8px 8px 8px;
+	cursor: default;
+	white-space: nowrap;
+	font-weight: bold;
+	font-size: 18px;
+	border-bottom: solid 1px #353942;
 }
 
 .queue-item-cover, .queue-item-metadata {
-    display: inline-block;
-    vertical-align: top;
+	display: inline-block;
+	vertical-align: top;
 }
 
 .queue-item-cover {
-    width: 48px;
-    height: 48px;
-    margin-right: 9px;
+	width: 48px;
+	height: 48px;
+	margin-right: 9px;
 }
 
 .queue-item-cover img {
-    object-fit: cover;
-    width: inherit;
-    height: inherit;
+	object-fit: cover;
+	width: inherit;
+	height: inherit;
 }
 
 .queue-item-cover span {
-    display: inline-block;
-    text-align: center;
-    width: 100%;
-    line-height: 48px;
-    color: #B3B3B3;
-    font-size: 13px;
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+	line-height: 48px;
+	color: #B3B3B3;
+	font-size: 13px;
 }
 
 .queue-item-metadata {
-    padding: 6px 0px;
-    width: 75%;
-    width: calc(100% - 60px);
-    width: -webkit-calc(100% - 60px);
-    width: -moz-calc(100% - 60px);
+	padding: 6px 0px;
+	width: 75%;
+	width: calc(100% - 60px);
+	width: -webkit-calc(100% - 60px);
+	width: -moz-calc(100% - 60px);
 }
 
 .queue-item-name {
-    font-size: 15px;
-    text-overflow: ellipsis;
-    overflow: hidden;
+	font-size: 15px;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .queue-item-artist {
-    color: #B3B3B3;
-    font-size: 13px;
-    text-overflow: ellipsis;
-    overflow: hidden;
+	color: #B3B3B3;
+	font-size: 13px;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 #searchbar-wrapper {
-    padding: 12px 24px;
+	padding: 12px 24px;
 }
 
 #searchbar {
-    display: block;
-    -webkit-box-sizing: border-box;
+	display: block;
+	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-    width: 100%;
-    margin: 0px;
-    padding: 4px 12px;
-    border: none;
-    outline: 0;
-    font-size: 17px;
-    height: 34px;
-    border-radius: 17px;
+	width: 100%;
+	margin: 0px;
+	padding: 4px 12px;
+	border: none;
+	outline: 0;
+	font-size: 17px;
+	height: 34px;
+	border-radius: 17px;
 }
